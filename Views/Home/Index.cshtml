@@ -1,0 +1,164 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string[] colors = new string[] { "#FACC5F", "#FFFFFF", "rgba(0, 0, 0, 0.2)", "#000000", "rgba(255, 255, 255, 0.49)", 
+    "rgba(0, 0, 0, 0.16)", "#FAFAFA" , "#FBCD60", "rgba(183, 183, 183, 0.15)" };
+}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+     <style>
+            html, body {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0px;
+                top: 0px;
+                overflow: hidden;
+            background: linear-gradient(214.63deg, @colors[0] 26.53%, @colors[1] 94.67%);
+                animation: bodyColor;
+                animation-duration: 1s;
+            }
+            @@keyframes bodyColor{
+            from {
+                background: @colors[1]
+            }
+
+            to {
+                background: @colors[1]
+            }
+            }
+            .main {
+               height:100%;
+               margin: 0 auto;
+               display: none;
+            }
+            .LimqImg {
+                width: 234px;
+                height: 157px;
+                margin: 0 auto;
+                margin-top: 180px;
+                background-image: url("../img/logo.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .LogIn {
+                width: 330px;
+                height: 100px;
+                margin: 0px auto;
+                margin-top: 150px;
+                box-shadow: 0px 0px 20px 0px @colors[2];
+                text-align: center;
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 40px;
+                line-height: 100px;
+                color: @colors[3];
+                background: @colors[4];
+                border: 2px solid @colors[5];
+                border-radius: 48px;
+                transition: box-shadow linear .3s;
+                cursor: pointer;
+            }
+            .LogIn:hover {
+                    box-shadow: 0px 0px 20px 10px @colors[2];
+            }
+
+            .SignUp {
+                width: 330px;
+                height: 100px;
+                margin: 0px auto;
+                margin-top: 80px;
+                box-shadow: 0px 0px 20px @colors[2];
+                text-align: center;
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 40px;
+                line-height: 100px;
+                color: @colors[6];
+                background: @colors[7];
+                border: 3px solid @colors[8];
+                border-radius: 48px;
+                transition: box-shadow linear .3s;
+                cursor: pointer;
+            }
+            .SignUp:hover {
+                box-shadow: 0px 0px 20px 10px @colors[2];
+            }
+
+            .AnimationCircle {
+                width: 200px;
+                height: 200px;
+                position: absolute;
+                left: calc(50% - 100px);
+                bottom: -300px;
+                background: linear-gradient(202.91deg, @colors[0] 14.86%, @colors[1] 87.81%);
+                border-radius: 50%;
+                display: block;
+                -webkit-animation-name: circleAnimation;
+                -webkit-animation-duration: 1s;
+                -webkit-animation-timing-function: ease-out;
+                -webkit-animation-fill-mode: forwards;
+            }
+
+            @@-webkit-keyframes circleAnimation {
+                0% {bottom: -500px }
+                30%{bottom: calc(50% - 100px); left: calc(50% - 100px); width: 200px; height: 200px}
+                95% {bottom: calc(50% - 85px); left: calc(50% - 85px); width: 170px; height: 170px;}
+                100%{bottom: calc(50% - 85px); left: calc(50% - 85px); width: 170px; height: 170px;}
+            }
+
+            .AnimationLogo {
+                width: 154px;
+                height: 100px;
+                position: absolute;
+                right: -254px;
+                top: calc(50% - 50px);
+                background-image: url("../img/logo.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: block;
+                -webkit-animation-name: logoAnimation;
+                -webkit-animation-duration: 1s;
+                -webkit-animation-timing-function: ease-out;
+                -webkit-animation-fill-mode: forwards;
+            }
+
+            @@-webkit-keyframes logoAnimation {
+                0% {right: -254px; }
+                30%{ right: calc(50% - 77px); top: calc(50% - 50px); width: 154px; height: 100px}
+                95% { right: calc(50% - 62px); top: calc(50% - 40px); width: 124px; height: 80px;}
+                100%{right: calc(50% - 62px); top: calc(50% - 40px); width: 124px; height: 80px;}
+}
+     </style>
+        <link rel="stylesheet" href="~/css/homeAdaptive.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body onselectstart="return false" onmousedown="return false">
+
+    <div class="AnimationCircle"></div>
+    <div class="AnimationLogo"></div>
+        <div class="main">
+            <div class="LimqImg"></div>
+            <div class="LogIn">LOG IN</div>
+            <div class="SignUp">SIGN UP</div>
+           
+        </div>
+
+        <script>
+            setTimeout(() => {
+                document.getElementsByClassName("main")[0].style.display = "block";
+                document.getElementsByClassName("AnimationCircle")[0].style.display = "none";
+                document.getElementsByClassName("AnimationLogo")[0].style.display = "none";
+            }, 1000);
+
+        
+        </script>
+    </body>
+
+</html>

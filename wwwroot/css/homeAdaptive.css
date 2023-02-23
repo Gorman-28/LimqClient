@@ -1,0 +1,153 @@
+﻿@media only screen and (max-height: 800px) {
+    .LimqImg {
+        width: 174px;
+        height: 117px;
+        margin-top: 150px;
+    }
+
+    .LogIn {
+        width: 280px;
+        height: 70px;
+        margin-top: 120px;
+        font-size: 30px;
+        line-height: 52px;
+    }
+
+    .SignUp {
+        width: 280px;
+        height: 70px;
+        margin-top: 50px;
+        font-size: 30px;
+        line-height: 52px;
+    }
+
+    .AnimationCircle {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        left: calc(50% - 75px);
+        bottom: -450px;
+    }
+
+    @-webkit-keyframes circleAnimation {
+        0% { bottom: -450px }
+
+        30% {bottom: calc(50% - 75px);left: calc(50% - 75px);width: 150px;height: 150px }
+
+        95% {bottom: calc(50% - 60px);left: calc(50% - 60px);width: 120px; height: 120px}
+
+        100% {bottom: calc(50% - 60px);left: calc(50% - 60px);width: 120px;height: 120px;}
+    }
+
+    .AnimationLogo {
+        width: 104px;
+        height: 70px;
+        position: absolute;
+        right: -204px;
+        top: calc(50% - 50px);
+    }
+
+    @-webkit-keyframes logoAnimation {
+        0% {right: -204px; }
+
+        30%{ right: calc(50% - 52px); top: calc(50% - 35px); width: 104px; height: 70px}
+
+        95% { right: calc(50% - 42px); top: calc(50% - 28px); width: 84px; height: 56px;}
+
+        100%{right: calc(50% - 42px); top: calc(50% - 28px); width: 84px; height: 56px;}
+    }
+}
+@media only screen and (max-height: 600px) {
+    .LimqImg {
+        width: 134px;
+        height: 90px;
+        margin-top: 110px;
+    }
+
+    .LogIn {
+        width: 250px;
+        height: 50px;
+        margin-top: 80px;
+        font-size: 24px;
+        line-height: 50px;
+    }
+
+    .SignUp {
+        width: 250px;
+        height: 50px;
+        margin-top: 50px;
+        font-size: 24px;
+        line-height: 50px;
+    }
+
+    .AnimationCircle {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: calc(50% - 55px);
+        bottom: -400px;
+    }
+
+    @-webkit-keyframes circleAnimation {
+        0% {
+            bottom: -400px
+        }
+
+        30% {
+            bottom: calc(50% - 50px);
+            left: calc(50% - 50px);
+            width: 100px;
+            height: 100px
+        }
+
+        95% {
+            bottom: calc(50% - 35px);
+            left: calc(50% - 35px);
+            width: 70px;
+            height: 70px
+        }
+
+        100% {
+            bottom: calc(50% - 35px);
+            left: calc(50% - 35px);
+            width: 70px;
+            height: 70px;
+        }
+    }
+
+    .AnimationLogo {
+        width: 54px;
+        height: 35px;
+        position: absolute;
+        right: -204px;
+        top: calc(50% - 50px);
+    }
+
+    @-webkit-keyframes logoAnimation {
+        0% {
+            right: -204px;
+        }
+
+        30% {
+            right: calc(50% - 27px);
+            top: calc(50% - 17.5px);
+            width: 54px;
+            height: 35px
+        }
+
+        95% {
+            right: calc(50% - 22px);
+            top: calc(50% - 14.5px);
+            width: 44px;
+            height: 29px;
+        }
+
+        100% {
+            right: calc(50% - 22px);
+            top: calc(50% - 14.5px);
+            width: 44px;
+            height: 29px;
+        }
+    }
+
+}
