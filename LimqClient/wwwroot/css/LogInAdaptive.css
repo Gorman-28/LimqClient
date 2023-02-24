@@ -1,0 +1,104 @@
+﻿@media only screen and (max-height: 800px) {
+    .LimqImg {
+        width: 130px;
+        height: 87px;
+        margin-top: 50px;
+    }
+
+    .field {
+        width: 500px;
+        height: 402px;
+        margin-top: 40px;
+        box-shadow: 0px 0px 20px 8px @colors[2];
+        border-radius: 78px;
+    }
+
+    .LogInText {
+        width: 86px;
+        height: 38px;
+        margin: 30px auto;
+        font-size: 26px;
+        line-height: 48px;
+    }
+
+    .LogIn {
+        width: 406px;
+        margin: 0 auto;
+    }
+    .Label {
+        width: 145px;
+        height: 36px;
+        margin-bottom: 5px;
+        font-size: 16px;
+        line-height: 36px;
+    }
+
+    .Input {
+        width: 406px;
+        height: 30px;
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .Submit {
+        width: 200px;
+        height: 41px;
+        margin-top: 10px;
+        font-size: 22px;
+        line-height: 42px;
+       
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    .LimqImg {
+        width: 100px;
+        height: 67px;
+        margin-top: 20px;
+    }
+
+    .field {
+        width: 400px;
+        height: 302px;
+        margin-top: 30px;
+        box-shadow: 0px 0px 20px 6px @colors[2];
+        border-radius: 78px;
+    }
+
+    .LogInText {
+        width: 56px;
+        height: 38px;
+        margin: 10px auto;
+        font-size: 18px;
+        line-height: 48px;
+    }
+
+    .LogIn {
+        width: 306px;
+        margin: 0 auto;
+    }
+
+    .Label {
+        width: 145px;
+        height: 26px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: 36px;
+    }
+
+    .Input {
+        width: 306px;
+        height: 30px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .Submit {
+        width: 150px;
+        height: 35px;
+        margin-top: 15px;
+        font-size: 18px;
+        line-height: 32px;
+        box-shadow: 0px 4px 4px 1px @colors[2];
+    }
+}

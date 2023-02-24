@@ -1,7 +1,13 @@
+using MyNamespace;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<IClient, Client>((HttpClient client, IServiceProvider provider) =>
+{
+    return new Client("https://localhost:7112/", client);
+});
 
 var app = builder.Build();
 
@@ -22,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=LogIn}/{id?}");
 
 app.Run();

@@ -1,0 +1,168 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Sign up Page";
+    string[] colors = ViewData["whiteTheme"] as string[];
+        
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        html, body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            overflow: hidden;
+            background: linear-gradient(214.63deg, @colors[0] 26.53%, @colors[1] 94.67%);
+           
+        }
+        
+        .LimqImg{
+            width: 160px;
+            height: 107px;
+
+            margin: 0 auto;
+            margin-top: 130px;
+            background-image: url("../img/logo.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .field{
+            box-sizing: border-box;
+
+            width: 630px;
+            height: 512px;
+            margin: 0 auto;
+
+            margin-top: 40px;
+
+            background: @colors[4];
+            border: 1px solid @colors[5];
+            box-shadow: 0px 0px 20px 10px @colors[2];
+            border-radius: 78px;
+        }
+
+        .LogInText{
+           
+            width: 116px;
+            height: 48px;
+            margin: 40px auto;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 48px;
+
+            color: @colors[9];
+            cursor: context-menu;
+        }
+
+        .LogIn{
+            width: 476px;
+            margin : 0 auto;
+            
+        }
+
+        .Label{
+            display: flex;
+            flex-direction: column;
+            width: 145px;
+            height: 36px;
+            margin-bottom: 10px;
+            margin-left: 0px;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 36px;
+
+            color: @colors[10];
+        }
+
+        .Input{
+            background: none;
+            border: none;
+            box-sizing: border-box;
+            width: 475px;
+            height: 40px;
+            font-size: 30px;
+            margin: 0 auto;
+            margin-bottom: 50px;
+            border-bottom: 2px solid @colors[10];
+
+        }
+
+        .Input:focus{
+            outline: none;
+            border-bottom: 2px solid @colors[10];
+        }
+
+        .Submit{
+            border: none;
+            display: flex;
+            justify-content: center;
+            width: 219px;
+            height: 61px;
+            margin: 0 auto;
+            margin-top: 20px;
+            background: @colors[7];
+            border-radius: 20px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px 2px @colors[2];
+            
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 35px;
+            line-height: 42px;
+            
+            color: @colors[11];
+            cursor: pointer;
+            transition: box-shadow linear .2s;
+        }
+
+        .Submit:hover{
+            box-shadow: 0px 4px 4px 4px @colors[2];
+        }
+
+        .Submit:active{
+            box-shadow: inset 0px 10px 20px 2px @colors[2];
+        }
+
+    </style>
+    <link rel="stylesheet" href="~/css/LogInAdaptive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body onselectstart="return false" >
+    <div class="main">
+        <div class="LimqImg"></div>
+        <div class="field">
+            <div class="Back"> </div>
+            <p class="LogInText">  Log in </p>
+            <form class="LogIn" method="get" asp-controller="LogIn" asp-action="Check">
+                <label class="Label" asp-for="UserName"></label>
+                <input class="Input" asp-for="UserName" maxlength="20" />
+                <span asp-validation-for="UserName"></span>
+
+                <label class="Label" asp-for="Password"></label>
+                <input class="Input" asp-for="Password" maxlength="20" />
+                <span asp-validation-for="Password"></span>
+
+                <input type="submit" class = "Submit" value="Log In" />
+            </form>
+        </div>
+    </div> 
+    
+    <script>
+        if(@ViewData["NoUser"] != null)
+            alert(@ViewData["NoUser"]);
+    </script>
+</body>
+
+</html>
