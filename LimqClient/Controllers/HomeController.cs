@@ -15,7 +15,13 @@ namespace LimqClient.Controllers
 
         public IActionResult LogIn()
         {
-            ViewData["whiteTheme"] = SettingArray.whiteTheme;
+            ViewData["Theme"] = SettingArray.whiteTheme;
+            return View();
+        }
+
+        public IActionResult SignUp()
+        {
+            ViewData["Theme"] = SettingArray.whiteTheme;
             return View();
         }
     }

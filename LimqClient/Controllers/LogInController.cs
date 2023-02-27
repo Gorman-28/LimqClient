@@ -1,4 +1,5 @@
-﻿using LimqClient.Settings;
+﻿using LimqClient.Models;
+using LimqClient.Settings;
 using Microsoft.AspNetCore.Mvc;
 using MyNamespace;
 using System.Security.Cryptography;
@@ -15,21 +16,28 @@ namespace LimqClient.Controllers
             this.client = client;
         }
 
-       
-        public async Task<IActionResult> Check(User user)
+        [HttpPost]
+        public async Task<IActionResult> Check(UserForLogIn user)
         {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
-            var hashPasword = Convert.ToBase64String(hash);
-            var userToFind = await client.GetUserAsync(user.UserName, hashPasword);
-            if (userToFind is null)
+            if (ModelState.IsValid)
             {
-                ViewData["whiteTheme"] = SettingArray.whiteTheme;
-                ViewData["NoUser"] = "No user with such name or password";
-                return View("../Home/LogIn");
+                var md5 = MD5.Create();
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
+                var hashPasword = Convert.ToBase64String(hash);
+                var userToFind = await client.GetUserAsync(user.UserName, hashPasword);
+                if (userToFind is null)
+                {
+                    ViewData["Theme"] = SettingArray.whiteTheme;
+                    ViewData["NoUser"] = "UserName or Password is incorrect";
+                    return View("../Home/LogIn");
+                }
+                
+                ViewData["Theme"] = SettingArray.whiteTheme;
+                return View("../Menu/MainMenu");
             }
-
-            return View("../Menu/MainMenu");
+            ViewData["NoUser"] = "";
+            ViewData["Theme"] = SettingArray.whiteTheme;
+            return View("../Home/LogIn");
         }  
 
         
