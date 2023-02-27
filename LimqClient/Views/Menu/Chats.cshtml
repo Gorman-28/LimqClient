@@ -1,0 +1,247 @@
+﻿@model ICollection<MyNamespace.GetAllChatsDto>
+@{
+    ViewData["Title"] = "Chat Page";
+    string[] colors = ViewData["Theme"] as string[];
+}
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <style>
+             body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                overflow: hidden;
+
+                background: @colors[13];
+            }
+
+            ::-webkit-scrollbar { 
+                width: 0px;  
+                background: transparent;  
+            }
+            .container{
+                
+                height: 90px;
+                margin: 0 auto;
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .container2{
+                width: 1756px;
+                display: flex;
+                flex-direction: column;
+                margin: 0 auto;
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .butt{
+                heihgt: 137px;
+                width: 250px;
+                background: @colors[7];
+                border-radius: 20px;
+                margin: 0 80px;
+                cursor: pointer;
+            }
+
+            .chats{
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+                height: 120px;
+                background: @colors[12];
+            }
+
+            .field {
+                box-sizing: border-box;
+                width: 1920px;
+                height: 1080px;
+                max-height: max-content;
+                margin: 0 auto;
+                margin-top: 30px;
+                background: @colors[12];
+                border-top-left-radius: 78px;
+                border-top-right-radius: 78px;
+            }
+
+            .image{
+                height: 120px;
+                width: 150px;
+                margin: 0 auto;
+                margin-top: -30px;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            #chats{
+                background-image: url("../img/chatsChosen.svg");
+            }
+
+            #group{
+                margin-top: -10px;
+                height: 80px;
+                width: 110px;
+                background-image: url("../img/groups.png");
+            }
+
+            #settings{
+                margin-top: -5px;
+                height: 80px;
+                width: 100px;
+                background-image: url("../img/settings.png");
+            }
+
+            .lock{
+                margin: 0 auto;
+                margin-left: 32px;
+                margin-top: -12px;
+                height: 115px;
+                width: 145px;
+                background-image: url("../img/closedLock.png");
+                cursor: pointer;
+            }
+
+            .add{
+                margin: 0 auto;
+                margin-right: 63px;
+                margin-top: 7px;
+                height: 110px;
+                width: 100px;
+                background-image: url("../img/add.png");
+                cursor: pointer;
+            }
+
+            .chatSearch{
+                background: none;
+                border: none;
+                height: 61px;
+                width: 1151px;
+                font-size: 30px;
+                margin-top: 29px;
+                box-sizing: border-box;
+                background: @colors[14];
+                border-radius: 20px;
+
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 35px;
+                line-height: 42px;
+                color: @colors[1];
+                text-align: center;
+            }
+
+            .chatSearch:focus {
+                outline: none;
+            }
+           
+            .chat{
+                
+                width: 1756px;
+                height: 116px;
+                margin: 0 auto;
+                margin-top: 30px;
+                background: @colors[14];
+                border-radius: 20px;
+                
+            }
+
+            .avatar{
+                
+                width: 80px;
+                height: 80px;
+                background: @colors[12];
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                border-radius: 50%;
+                margin: 20px auto;
+                margin-left: 20px;
+            }
+
+            .userName{
+                
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 35px;
+                line-height: 42px;
+                margin: auto;
+                margin-top: -110px;
+                margin-left: 150px;
+                color: @colors[1];
+            }
+
+            .messageTime{
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 35px;
+                color: @colors[1];
+                margin: auto;
+                margin-top: -35px;
+                margin-left: 1650px;
+            }
+
+            .message{
+                width: 1506px;
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 35px;
+                color: @colors[1];
+                margin: auto;
+                margin-top: 15px;
+                margin-left: 150px;
+                overflow: hidden;
+            }
+
+        </style>
+        <title>@ViewData["Title"]</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+
+<body onselectstart="return false">
+        <div class="container">
+            <div class="butt chats" ><div class="image" id="chats"></div></div>
+            <div class="butt"><div class="image" id="group"></div></div>
+            <div class="butt"><div class="image" id="settings"></div></div>
+        </div>
+
+        <div class="field">
+            <div class="container">
+                <div class="image lock"></div>
+                <input class="chatSearch"></input>
+                <div class="image add"></div>
+            </div>
+
+            <div class="container2">
+                @if (Model != null)
+                {
+                    @foreach (var chat in Model)
+                    {
+                        <div class="chat">
+                            <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
+                            <div class="userName">@chat.UserName</div>
+                            <div class="messageTime">@chat.MessageTime.ToLocalTime().Hour:@chat.MessageTime.ToLocalTime().Minute</div>
+                            <div class="message">@chat.Message</div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+
+        
+    </body>
+
+</html>

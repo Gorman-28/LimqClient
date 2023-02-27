@@ -283,12 +283,12 @@ namespace MyNamespace
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, FileParameter avatar);
+        System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, IFormFile avatar);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, FileParameter avatar, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, IFormFile avatar, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2044,13 +2044,10 @@ namespace MyNamespace
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ <= 299)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetUsersDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+                            
                             return objectResponse_.Object;
                         }
                         else
@@ -2715,7 +2712,7 @@ namespace MyNamespace
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, FileParameter avatar)
+        public virtual System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, IFormFile avatar)
         {
             return CreateUserAsync(userName, password, firstName, lastName, avatar, System.Threading.CancellationToken.None);
         }
@@ -2723,7 +2720,7 @@ namespace MyNamespace
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, FileParameter avatar, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Unit> CreateUserAsync(string userName, string password, string firstName, string lastName, IFormFile avatar, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/users/CreateUser");
@@ -2771,10 +2768,14 @@ namespace MyNamespace
                         throw new System.ArgumentNullException("avatar");
                     else
                     {
-                        var content_avatar_ = new System.Net.Http.StreamContent(avatar.Data);
-                        if (!string.IsNullOrEmpty(avatar.ContentType))
-                            content_avatar_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(avatar.ContentType);
-                        content_.Add(content_avatar_, "Avatar", avatar.FileName ?? "Avatar");
+                        byte[] imageData = null;
+                       
+                        using (var binaryReader = new BinaryReader(avatar.OpenReadStream()))
+                        {
+                            imageData = binaryReader.ReadBytes((int)avatar.Length);
+                        }
+                        ByteArrayContent bytes = new ByteArrayContent(imageData);
+                        content_.Add(bytes, "Avatar", avatar.FileName ?? "Avatar");
                     }
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -3741,9 +3742,6 @@ namespace MyNamespace
 
         [Newtonsoft.Json.JsonProperty("userName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UserName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Password { get; set; }
 
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FirstName { get; set; }

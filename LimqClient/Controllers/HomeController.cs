@@ -10,18 +10,18 @@ namespace LimqClient.Controllers
         
         public IActionResult Index()
         {
-            return View(SettingArray.whiteTheme);
+            return View(SettingArray.theme);
         }
 
         public IActionResult LogIn()
         {
-            ViewData["Theme"] = SettingArray.whiteTheme;
+            ViewData["Theme"] = SettingArray.theme;
             return View();
         }
 
         public IActionResult SignUp()
         {
-            ViewData["Theme"] = SettingArray.whiteTheme;
+            ViewData["Theme"] = SettingArray.theme;
             return View();
         }
     }

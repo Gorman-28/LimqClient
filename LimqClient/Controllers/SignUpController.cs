@@ -25,9 +25,10 @@ namespace LimqClient.Controllers
                 var uniqUser = await client.CheckUserAsync(user.UserName);
                 if (uniqUser is null)
                 {
-                    using var stream = System.IO.File.OpenRead("wwwroot/img/standartAvatar.svg");
+                    var file = "./wwwroot/img/logo.png";
+                    using var stream = new MemoryStream(System.IO.File.ReadAllBytes(file).ToArray());
 
-                    var avatar = new FileParameter(stream, Path.GetFileName(stream.Name));
+                    var avatar = new FormFile(stream, 0, stream.Length, "streamFile", file.Split(@"\").Last());
 
                     var md5 = MD5.Create();
                     var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(user.Password));
@@ -40,19 +41,18 @@ namespace LimqClient.Controllers
                         Status = true
                     });
 
-                    ViewData["Theme"] = SettingArray.whiteTheme;
-                    return View("../Menu/MainMenu");
+                    return RedirectToAction("Chats", "Menu");
 
                 }
                 else
                 {
-                    ViewData["Theme"] = SettingArray.whiteTheme;
+                    ViewData["Theme"] = SettingArray.theme;
                     ViewData["NoUnique"] = "This UserName is already exists";
                     return View("../Home/SignUp");
                 }
             }
             ViewData["NoUnique"] = "";
-            ViewData["Theme"] = SettingArray.whiteTheme;
+            ViewData["Theme"] = SettingArray.theme;
             return View("../Home/SignUp");
         }
     }
