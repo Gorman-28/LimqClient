@@ -10,18 +10,20 @@ namespace LimqClient.Controllers
         
         public IActionResult Index()
         {
-            return View(SettingArray.theme);
+            if(Request.Cookies.ContainsKey("UserName"))
+                return RedirectToAction("Enter", "Menu");
+            return View(Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme);
         }
 
         public IActionResult LogIn()
         {
-            ViewData["Theme"] = SettingArray.theme;
+            ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View();
         }
 
         public IActionResult SignUp()
         {
-            ViewData["Theme"] = SettingArray.theme;
+            ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View();
         }
     }

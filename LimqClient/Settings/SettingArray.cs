@@ -18,5 +18,4 @@ public static class SettingArray
 
     public static string[] blackTheme = new string[1];
 
-    public static string[] theme = whiteTheme;
 }

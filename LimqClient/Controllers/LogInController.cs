@@ -27,15 +27,17 @@ namespace LimqClient.Controllers
                 var userToFind = await client.GetUserAsync(user.UserName, hashPasword);
                 if (userToFind is null)
                 {
-                    ViewData["Theme"] = SettingArray.theme;
+                    ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
                     ViewData["NoUser"] = "UserName or Password is incorrect";
                     return View("../Home/LogIn");
                 }
                 SettingArray.MyUser = await client.GetUserAsync(user.UserName, hashPasword);
+                Response.Cookies.Append("UserName", $"{user.UserName}");
+                Response.Cookies.Append("Password", $"{hashPasword}");
                 return RedirectToAction("Chats", "Menu");
             }
             ViewData["NoUser"] = "";
-            ViewData["Theme"] = SettingArray.theme;
+            ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View("../Home/LogIn");
         }  
 

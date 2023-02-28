@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MyNamespace;
 using System.Security.Cryptography;
 using System.Text;
-using LimqClient.Models;
 using User = LimqClient.Models.User;
 
 namespace LimqClient.Controllers
@@ -41,18 +40,20 @@ namespace LimqClient.Controllers
                         Status = true
                     });
 
+                    Response.Cookies.Append("UserName", $"{user.UserName}");
+                    Response.Cookies.Append("Password", $"{hashPasword}");
                     return RedirectToAction("Chats", "Menu");
 
                 }
                 else
                 {
-                    ViewData["Theme"] = SettingArray.theme;
+                    ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
                     ViewData["NoUnique"] = "This UserName is already exists";
                     return View("../Home/SignUp");
                 }
             }
             ViewData["NoUnique"] = "";
-            ViewData["Theme"] = SettingArray.theme;
+            ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View("../Home/SignUp");
         }
     }

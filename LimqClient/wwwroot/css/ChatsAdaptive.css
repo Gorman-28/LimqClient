@@ -1,0 +1,199 @@
+﻿@media only screen and (max-height: 800px){
+    .container {
+        height: 70px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    .container2 {
+        width: 1300px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    .butt {
+        heihgt: 117px;
+        width: 200px;
+       
+    }
+
+    .chats {
+        height: 105px;
+    }
+
+    .field {
+        margin-top: 20px;
+    }
+
+    .image {
+        height: 100px;
+        width: 130px;
+        margin-top: -25px;
+       
+    }
+
+    #group {
+        margin-top: -10px;
+        height: 70px;
+        width: 90px;
+    }
+
+    #settings {
+        margin-top: -5px;
+        height: 65px;
+        width: 80px;
+    }
+
+    .lock {
+        margin-left: 72px;
+        margin-top: -3px;
+        height: 105px;
+        width: 115px;
+    }
+
+    .add {
+        margin: 0 auto;
+        margin-right: 80px;
+        margin-top: 6px;
+        height: 100px;
+        width: 90px;
+    }
+
+    .chatSearch {
+        height: 51px;
+        width: 951px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .chat {
+        width: 100%;
+        height: 96px;
+        margin-top: 20px;
+
+    }
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .userName {
+        font-size: 28px;
+        line-height: 34px;
+        margin-top: -90px;
+    }
+
+    .messageTime {
+        font-size: 18px;
+        line-height: 25px;
+        margin-top: -37px;
+        margin-left: 1200px;
+    }
+
+    .message {
+        width: 1256px;
+        font-size: 22px;
+        line-height: 29px;
+        margin-top: 20px;
+        margin-left: 149px;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    .container {
+        height: 50px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    .container2 {
+        width: 950px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    .butt {
+        heihgt: 97px;
+        width: 150px;
+    }
+
+    .chats {
+        height: 85px;
+    }
+
+    .field {
+        margin-top: 20px;
+    }
+
+    .image {
+        height: 70px;
+        width: 100px;
+        margin-top: -20px;
+    }
+
+    #group {
+        margin-top: -10px;
+        height: 50px;
+        width: 70px;
+    }
+
+    #settings {
+        margin-top: -8px;
+        height: 50px;
+        width: 65px;
+    }
+
+    .lock {
+        margin-left: 82px;
+        margin-top: 0px;
+        height: 95px;
+        width: 105px;
+    }
+
+    .add {
+        margin: 0 auto;
+        margin-right: 95px;
+        margin-top: 10px;
+        height: 90px;
+        width: 80px;
+    }
+
+    .chatSearch {
+        height: 51px;
+        width: 751px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .chat {
+        width: 100%;
+        height: 86px;
+        margin-top: 20px;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .userName {
+        font-size: 24px;
+        line-height: 26px;
+        margin-top: -75px;
+    }
+
+    .messageTime {
+        font-size: 14px;
+        line-height: 25px;
+        margin-top: -37px;
+        margin-left: 850px;
+    }
+
+    .message {
+        width: 800px;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 20px;
+        margin-left: 150px;
+    }
+}

@@ -11,7 +11,8 @@
     <head>
         <meta charset="utf-8" />
         <style>
-             body {
+            html, body {
+                position: absolute;
                 width: 100%;
                 height: 100%;
                 margin: 0;
@@ -25,7 +26,7 @@
                 background: transparent;  
             }
             .container{
-                
+               
                 height: 90px;
                 margin: 0 auto;
                 margin-top: 20px;
@@ -48,20 +49,20 @@
                 width: 250px;
                 background: @colors[7];
                 border-radius: 20px;
-                margin: 0 80px;
+                margin: 0 auto;
                 cursor: pointer;
             }
 
             .chats{
                 border-bottom-left-radius: 0px;
                 border-bottom-right-radius: 0px;
-                height: 120px;
+                height: 125px;
                 background: @colors[12];
             }
 
             .field {
                 box-sizing: border-box;
-                width: 1920px;
+                width: 100%;
                 height: 1080px;
                 max-height: max-content;
                 margin: 0 auto;
@@ -88,14 +89,14 @@
                 margin-top: -10px;
                 height: 80px;
                 width: 110px;
-                background-image: url("../img/groups.png");
+                background-image: url("../img/groups.svg");
             }
 
             #settings{
                 margin-top: -5px;
                 height: 80px;
                 width: 100px;
-                background-image: url("../img/settings.png");
+                background-image: url("../img/settings.svg");
             }
 
             .lock{
@@ -104,7 +105,7 @@
                 margin-top: -12px;
                 height: 115px;
                 width: 145px;
-                background-image: url("../img/closedLock.png");
+                background-image: url("../img/closedLock.svg");
                 cursor: pointer;
             }
 
@@ -114,7 +115,7 @@
                 margin-top: 7px;
                 height: 110px;
                 width: 100px;
-                background-image: url("../img/add.png");
+                background-image: url("../img/add.svg");
                 cursor: pointer;
             }
 
@@ -123,7 +124,6 @@
                 border: none;
                 height: 61px;
                 width: 1151px;
-                font-size: 30px;
                 margin-top: 29px;
                 box-sizing: border-box;
                 background: @colors[14];
@@ -167,8 +167,7 @@
             }
 
             .userName{
-                
-                font-family: 'Inter';
+                font-family: 'Inter', sans-serif;
                 font-style: normal;
                 font-weight: 600;
                 font-size: 35px;
@@ -180,9 +179,9 @@
             }
 
             .messageTime{
-                font-family: 'Inter';
+                font-family: 'Inter', sans-serif;
                 font-style: normal;
-                font-weight: 500;
+                font-weight: 400;
                 font-size: 24px;
                 line-height: 35px;
                 color: @colors[1];
@@ -193,9 +192,9 @@
 
             .message{
                 width: 1506px;
-                font-family: 'Inter';
+                font-family: 'Inter', sans-serif;
                 font-style: normal;
-                font-weight: 500;
+                font-weight: 700;
                 font-size: 24px;
                 line-height: 35px;
                 color: @colors[1];
@@ -207,13 +206,14 @@
 
         </style>
         <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     </head>
 
 <body onselectstart="return false">
         <div class="container">
             <div class="butt chats" ><div class="image" id="chats"></div></div>
-            <div class="butt"><div class="image" id="group"></div></div>
+            <div class="butt" onclick="window.location='./Squads'"><div class="image" id="group"></div></div>
             <div class="butt"><div class="image" id="settings"></div></div>
         </div>
 
