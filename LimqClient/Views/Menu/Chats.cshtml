@@ -16,7 +16,7 @@
                 width: 100%;
                 height: 100%;
                 margin: 0;
-                overflow: hidden;
+                overflow-y: scroll;
 
                 background: @colors[13];
             }
@@ -42,6 +42,7 @@
                 margin-top: 20px;
                 display: flex;
                 justify-content: space-between;
+                
             }
 
             .butt{
@@ -63,8 +64,7 @@
             .field {
                 box-sizing: border-box;
                 width: 100%;
-                height: 1080px;
-                max-height: max-content;
+                min-height: 1080px;
                 margin: 0 auto;
                 margin-top: 30px;
                 background: @colors[12];
@@ -176,6 +176,7 @@
                 margin-top: -110px;
                 margin-left: 150px;
                 color: @colors[1];
+                cursor: pointer;
             }
 
             .messageTime{
@@ -202,6 +203,7 @@
                 margin-top: 15px;
                 margin-left: 150px;
                 overflow: hidden;
+                cursor: pointer;
             }
 
         </style>
@@ -209,6 +211,7 @@
         <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
     </head>
 
 <body onselectstart="return false">
@@ -230,33 +233,56 @@
                 {
                     @foreach (var chat in Model)
                     {
-                    
-                        <div class="chat">
+
+                        <div class="chat" id="@chat.Id">
                             <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
                         <div class="userName" onclick="window.location='../Chat/Main/@chat.Id.ToString()';">@chat.UserName</div>
-                        <div class="messageTime" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.MessageTime.ToLocalTime().Hour:@chat.MessageTime.ToLocalTime().Minute</div>
-                        <div class="message" id="@chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.Message</div>
+                        <div class="messageTime @chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.MessageTime.ToLocalTime().ToShortTimeString()</div>
+                        <div class="message @chat.Id"  onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.Message</div>
                         </div>
                     }
+
+                <div class="chat"></div>
+                <div class="chat"></div>
+                <div class="chat"></div>
+                <div class="chat"></div>
+                <div class="chat"></div>
+                <div class="chat"></div>
+                <div class="chat"></div>
                 }
 
             </div>
-            </div>
+        </div>
 
     <script>
         "use strict";
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/chatHub")
+            .withUrl("/ChatHub")
             .build();
-        connection.start()
+        connection.start().then(() => { 
+                
+            @foreach(var item in Model){
+                @:connection.invoke('JoinGroup', '@item.Id.ToString()');
+            }
+               
+            })
             .catch(err => alert(err.toString()));
 
 
-        connection.Invoke('JoinGroups', @Model);
         
-        //connection.on("SendMessage", function(message){
+        
+        connection.on("SendMessage", function(user,message,time){
+            let result1 = document.getElementsByClassName("message " + user);
+            let result2 = document.getElementsByClassName("messageTime " + user);
+            if(result1.length > 0 && result2.length > 0){
+                result1[0].textContent = message;
+                result2[0].textContent = time;
+                $(".container2").prepend($("#" + user));
+            }
+            else{
 
-        //});
+            }
+        });
        
     </script>
     

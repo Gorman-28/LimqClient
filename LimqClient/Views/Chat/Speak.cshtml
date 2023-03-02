@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "MessageChat Page";
     string[] colors = ViewData["Theme"] as string[];
-    //MyNamespace.GetAllChatsDto chat = ViewData["chat"] as MyNamespace.GetAllChatsDto;
+    MyNamespace.GetAllChatsDto chat = ViewData["chat"] as MyNamespace.GetAllChatsDto;
 }
 
 <!DOCTYPE html>
@@ -21,9 +21,14 @@
             background: @colors[15];
         }
 
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
         .upper{
             width: 100%;
-            height: 190px;
+            height: 156px;
             display: flex;
             justify-content: center;
         }
@@ -91,8 +96,79 @@
             text-align: center;
         }
 
-        
+        .container{
+            background: red;
+            width: 1800px;
+            margin: 0px auto;
+            min-height: 707px;
+            overflow-y: scroll;
+        }
 
+        .container > .block {
+            margin-top: 60px;
+        }
+
+        .container > .block ~ .block {
+            margin-top: 0px;
+        }
+
+        .block{
+            min-height: 125px;
+            width: 900px;
+            margin: 30px 0;
+            margin-right: 0px;
+            
+        }
+        .message{
+            min-height: 100px;
+            max-width: 800px;
+            display: flex;
+            justify-content: start;
+        }        
+
+        .context {
+            display:flex;
+            flex-direction: column;
+        }
+
+        .avatar{
+            height: 81px;
+            width: 81px;
+            border-radius: 50%;
+            margin: 10px 10px ;
+        }
+
+
+        .text{
+            min-width: 340px;
+            max-width: 680px;
+            min-height: 79px;
+            background: @colors[18];
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 36px;
+            color: @colors[1];
+            word-wrap: break-word;
+            padding: 10px;
+        }
+
+        .time{
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 24px;
+            color: silver;
+        }
+
+        .right{
+            margin-left: 1340px;
+        }
+
+        .left{
+            margin-left: 0px;
+        }
     </style>
     <title>@ViewData["Title"]</title>
     <script src="~/lib/signalr/dist/browser/signalr.js"></script>
@@ -109,9 +185,40 @@
                 <span class="Name">Gorman</span>
                 <span class="Status">online</span>
             </span>
-            <img class="Avatar" src="data:image/jpeg;base64,@*@(Convert.ToBase64String(chat.Avatar))*@" />
+            <img class="Avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
+
         </div>
     </div>
+        <div class="container">
+           @foreach(var item in Model){
+
+            if(item.UserFromId == LimqClient.Settings.SettingArray.MyUser.Id){
+                <div class="block">
+                    <div class="message right">
+                        <div style=" background: @colors[16]; text-align:right;" class="text">@item.Message</div>
+                        <div class="context">
+                            <img style="margin-left: 10px; background: @colors[20];" class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
+                            <div class="time">@item.MessageTime.ToLocalTime().ToShortTimeString()</div>
+                    </div>
+                    
+                </div>
+                </div>
+            }
+            else{
+                <div class="block">
+                    <div class="message left">
+                        <div class="context">
+                            <img style="margin-left: 10px; background: @colors[19];" class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />
+                            <div class="time">@item.MessageTime.ToLocalTime().ToShortTimeString()</div>
+                        </div>
+                        <div style="text-align:left;" class="text">@item.Message</div>
+                    </div>
+                </div>
+            }
+            }
+
+        </div>
+    
 
     <script>
         "use strict";
@@ -122,9 +229,18 @@
             .catch(err => alert(err.toString()));
 
 
-        connection.on("SendMessage", function (message) {
+        connection.on("SendMessage", function (message, time) {
+            let result1 = document.getElementsByClassName("message " + user);
+            let result2 = document.getElementsByClassName("messageTime " + user);
+            if (result1.length > 0 && result2.length > 0) {
+                result1[0].textContent = message;
+                result2[0].textContent = time;
+                $(".container2").prepend($("#" + user));
+            }
+            else {
 
-        })
+            }
+        });
 
     </script>
 

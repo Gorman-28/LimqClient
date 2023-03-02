@@ -3436,10 +3436,10 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Time { get; set; }
+        public System.DateTime Time { get; set; }
 
         [Newtonsoft.Json.JsonProperty("newTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset NewTime { get; set; }
+        public System.DateTime NewTime { get; set; }
 
     }
 
@@ -3456,10 +3456,10 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Time { get; set; }
+        public System.DateTime Time { get; set; }
 
         [Newtonsoft.Json.JsonProperty("newTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset NewTime { get; set; }
+        public System.DateTime NewTime { get; set; }
 
     }
 
@@ -3542,7 +3542,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
     }
 
@@ -3559,7 +3559,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
         [Newtonsoft.Json.JsonProperty("systemMessage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool SystemMessage { get; set; }
@@ -3624,7 +3624,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
     }
 
@@ -3661,7 +3661,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
     }
 
@@ -3681,7 +3681,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
         [Newtonsoft.Json.JsonProperty("systemMessage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool SystemMessage { get; set; }
@@ -3724,7 +3724,7 @@ namespace MyNamespace
         public string Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
         [Newtonsoft.Json.JsonProperty("systemMessage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool SystemMessage { get; set; }
@@ -3786,7 +3786,7 @@ namespace MyNamespace
         public System.Guid UserToId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Time { get; set; }
+        public System.DateTime Time { get; set; }
 
     }
 
@@ -3800,7 +3800,7 @@ namespace MyNamespace
         public System.Guid UserFromId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("time", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset Time { get; set; }
+        public System.DateTime Time { get; set; }
 
     }
 
@@ -3943,7 +3943,7 @@ namespace MyNamespace
         public System.String Message { get; set; }
 
         [Newtonsoft.Json.JsonProperty("messageTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset MessageTime { get; set; }
+        public System.DateTime MessageTime { get; set; }
 
     }
 

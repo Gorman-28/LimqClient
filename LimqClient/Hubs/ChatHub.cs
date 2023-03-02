@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Text.RegularExpressions;
-using System;
 using LimqClient.Settings;
+using MyNamespace;
 
 namespace LimqClient.Hubs
 {
@@ -9,20 +8,21 @@ namespace LimqClient.Hubs
     public class ChatHub : Hub
     {
 
-        public async Task JoinGroups(MyNamespace.GetAllChatsDto[] chats)
+        public async Task JoinGroup(string chat)
         {
-            foreach(var chat in chats)
-                await Groups.AddToGroupAsync(Context.ConnectionId, $"{SettingArray.MyUser.Id}+{chat.Id.ToString()}" );
+            
+            await Groups.AddToGroupAsync(Context.ConnectionId, $"{SettingArray.MyUser.Id}{chat}" );
+
         }
 
-        public async Task SendMessage(MyNamespace.MessageChat message)
+        public async Task SendMessage(string id, string message, string time)
         {
-            await Clients.All.SendAsync("SendMessage", message);
+            await Clients.All.SendAsync("SendMessage", $"{id}", $"{message}", $"{time}");
         }
 
-        public Task SendMessageToGroup(MyNamespace.MessageChat message, Guid id)
+        public Task SendMessageToGroup(string id, string message, string time)
         {
-            return Clients.Group($"{id.ToString()}+{SettingArray.MyUser.Id}").SendAsync("SendMessage", message);
+            return Clients.Group($"{id}{SettingArray.MyUser.Id}").SendAsync("SendMessage", id, message, time);
         }
     }
     

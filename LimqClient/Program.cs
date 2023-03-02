@@ -30,9 +30,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.UseEndpoints(endpoints => {
-    endpoints.MapHub<ChatHub>($"{nameof(ChatHub)}");
-});
+app.MapHub<ChatHub>($"/{nameof(ChatHub)}");
+
 
 app.UseAuthorization();
 

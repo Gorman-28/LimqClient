@@ -227,7 +227,7 @@
                     <div class="chat">
                         <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
                         <div class="userName">@chat.Name</div>
-                        <div class="messageTime">@chat.MessageTime.ToLocalTime().Hour:@chat.MessageTime.ToLocalTime().Minute</div>
+                        <div class="messageTime">@chat.MessageTime.ToLocalTime().ToShortTimeString()</div>
                         <div class="message">@chat.Message</div>
                     </div>
                 }
