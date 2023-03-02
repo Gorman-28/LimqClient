@@ -1,0 +1,138 @@
+﻿@model ICollection<MyNamespace.GetMessagesChatDto>
+@{
+    ViewData["Title"] = "MessageChat Page";
+    string[] colors = ViewData["Theme"] as string[];
+    //MyNamespace.GetAllChatsDto chat = ViewData["chat"] as MyNamespace.GetAllChatsDto;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <style>
+        html, body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: @colors[15];
+        }
+
+        .upper{
+            width: 100%;
+            height: 190px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .info{
+            width: 1600px;
+            height: 155px;
+            margin: 0 auto;
+            margin-left: -80px;
+            background: @colors[16];
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            display: flex;
+            flex-direction:row;
+            justify-content: center;
+        }
+
+        #vertical{
+            display: flex;
+            flex-direction: column;
+            margin-left: 650px;
+        }
+
+        #Back{
+            width: 39px;
+            height: 69px;
+            margin: 40px auto;
+            margin-left: 55px;
+            background-image: url("../img/arrow.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .Avatar {
+            height: 90px;
+            width: 90px;
+            background: @colors[15];
+            border-radius: 50%;
+            margin-left: 550px;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .Name{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 35px;
+            line-height: 42px;
+            margin: 0px auto;
+            margin-top: 40px;
+            text-align: center;
+            color: @colors[1];
+            cursor: pointer;
+        }
+
+        .Status{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            color: @colors[17];
+            text-align: center;
+        }
+
+        
+
+    </style>
+    <title>@ViewData["Title"]</title>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body onselectstart="return false">
+    
+    <div class = "upper">
+        <div id="Back" onclick="window.location='/../Menu/Chats'" type="image/svg+xml"></div>
+        <div class= "info">
+            
+            <span id="vertical">
+                <span class="Name">Gorman</span>
+                <span class="Status">online</span>
+            </span>
+            <img class="Avatar" src="data:image/jpeg;base64,@*@(Convert.ToBase64String(chat.Avatar))*@" />
+        </div>
+    </div>
+
+    <script>
+        "use strict";
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/ChatHub")
+            .build();
+        connection.start()
+            .catch(err => alert(err.toString()));
+
+
+        connection.on("SendMessage", function (message) {
+
+        })
+
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+

@@ -1,10 +1,12 @@
 using MyNamespace;
 using Microsoft.AspNetCore.Mvc;
+using LimqClient.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 builder.Services.AddHttpClient<IClient, Client>((HttpClient client, IServiceProvider provider) =>
 {
     return new Client("https://localhost:7112/", client);
@@ -21,9 +23,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
+
 app.UseRouting();
+
+
+app.UseEndpoints(endpoints => {
+    endpoints.MapHub<ChatHub>($"{nameof(ChatHub)}");
+});
 
 app.UseAuthorization();
 

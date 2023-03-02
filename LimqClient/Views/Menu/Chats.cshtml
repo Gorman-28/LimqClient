@@ -208,6 +208,7 @@
         <title>@ViewData["Title"]</title>
         <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <script src="~/lib/signalr/dist/browser/signalr.js"></script>
     </head>
 
 <body onselectstart="return false">
@@ -220,7 +221,7 @@
         <div class="field">
             <div class="container">
                 <div class="image lock"></div>
-                <input class="chatSearch"></input>
+                <input class="chatSearch" />
                 <div class="image add"></div>
             </div>
 
@@ -229,19 +230,36 @@
                 {
                     @foreach (var chat in Model)
                     {
+                    
                         <div class="chat">
                             <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
-                            <div class="userName">@chat.UserName</div>
-                            <div class="messageTime">@chat.MessageTime.ToLocalTime().Hour:@chat.MessageTime.ToLocalTime().Minute</div>
-                            <div class="message">@chat.Message</div>
+                        <div class="userName" onclick="window.location='../Chat/Main/@chat.Id.ToString()';">@chat.UserName</div>
+                        <div class="messageTime" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.MessageTime.ToLocalTime().Hour:@chat.MessageTime.ToLocalTime().Minute</div>
+                        <div class="message" id="@chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.Message</div>
                         </div>
                     }
                 }
 
             </div>
-        </div>
+            </div>
 
+    <script>
+        "use strict";
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+        connection.start()
+            .catch(err => alert(err.toString()));
+
+
+        connection.Invoke('JoinGroups', @Model);
         
-    </body>
+        //connection.on("SendMessage", function(message){
+
+        //});
+       
+    </script>
+    
+</body>
 
 </html>
