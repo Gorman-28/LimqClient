@@ -161,7 +161,7 @@
             margin-left: 20px;
         }
 
-        .userName {
+        .Name {
             font-family: 'Inter', sans-serif;
             font-style: normal;
             font-weight: 600;
@@ -222,21 +222,50 @@
         <div class="container2">
             @if (Model != null)
             {
-                @foreach (var chat in Model)
+                @foreach (var squad in Model)
                 {
                     <div class="chat">
-                        <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
-                        <div class="userName">@chat.Name</div>
-                        <div class="messageTime">@chat.MessageTime.ToLocalTime().ToShortTimeString()</div>
-                        <div class="message">@chat.Message</div>
+                        <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(squad.Avatar))" />
+                        <div class="Name " onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Name</div>
+                        <div class="messageTime @squad.Id.ToString()" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.MessageTime.ToLocalTime().ToShortTimeString()</div>
+                        <div class="message @squad.Id.ToString()" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Message</div>
                     </div>
                 }
             }
 
         </div>
     </div>
+    <script>
+        "use strict";
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7112/SquadHub")
+            .build();
+        connection.start().then(() => {
+
+        @foreach (var item in Model)
+        {
+            @:connection.invoke('JoinGroup', '@item.Id.ToString()', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()');
+        }
+
+                    })
+            .catch(err => alert(err.toString()));
 
 
+
+
+        connection.on("ReceiveMessage", (squad, message, time) => {
+            let result1 = document.getElementsByClassName("message " + squad);
+            let result2 = document.getElementsByClassName("messageTime " + squad);
+            if (result1.length > 0 && result2.length > 0) {
+                result1[0].textContent = message;
+                result2[0].textContent = time;
+                $(".container2").prepend($("#" + squad));
+            }
+            else {
+
+            }
+        });
+        </script>
 </body>
 
 </html>

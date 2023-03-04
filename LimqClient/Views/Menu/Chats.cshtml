@@ -257,12 +257,12 @@
     <script>
         "use strict";
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/ChatHub")
+            .withUrl("https://localhost:7112/ChatHub")
             .build();
         connection.start().then(() => { 
                 
             @foreach(var item in Model){
-                @:connection.invoke('JoinGroup', '@item.Id.ToString()');
+                @:connection.invoke('JoinGroup', '@item.Id.ToString()', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()');
             }
                
             })
@@ -271,7 +271,7 @@
 
         
         
-        connection.on("SendMessage", function(user,message,time){
+        connection.on("ReceiveMessage", (user, message, time) => {
             let result1 = document.getElementsByClassName("message " + user);
             let result2 = document.getElementsByClassName("messageTime " + user);
             if(result1.length > 0 && result2.length > 0){

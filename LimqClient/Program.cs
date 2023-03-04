@@ -1,6 +1,5 @@
 using MyNamespace;
 using Microsoft.AspNetCore.Mvc;
-using LimqClient.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +27,6 @@ app.UseStaticFiles();
 
 
 app.UseRouting();
-
-
-app.MapHub<ChatHub>($"/{nameof(ChatHub)}");
 
 
 app.UseAuthorization();

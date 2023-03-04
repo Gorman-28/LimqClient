@@ -823,13 +823,10 @@ namespace MyNamespace
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
+                        if (status_ >= 200 && status_ <=299)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Unit>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
+
                             return objectResponse_.Object;
                         }
                         else

@@ -1,15 +1,14 @@
 ﻿using LimqClient.Settings;
 using Microsoft.AspNetCore.Mvc;
 using MyNamespace;
-using System;
 
 namespace LimqClient.Controllers
 {
-    public class ChatController : Controller
+    public class SquadController : Controller
     {
         private readonly IClient client;
 
-        public ChatController(IClient client)
+        public SquadController(IClient client)
         {
             this.client = client;
         }
@@ -21,23 +20,24 @@ namespace LimqClient.Controllers
 
         public async Task<IActionResult> Speak(Guid guidId)
         {
-            var chat = await client.GetChatsAsync(SettingArray.MyUser.Id);
-            var messages = await client.GetMessagesChatsAsync(SettingArray.MyUser.Id, guidId);
-            ViewData["chat"] = chat.FirstOrDefault(c => c.Id == guidId);
+            var squad = await client.GetSquadsAsync(SettingArray.MyUser.Id);
+            var messages = await client.GetMessagesSquadAsync(guidId);
+            ViewData["squad"] = squad.FirstOrDefault(c => c.Id == guidId);
             ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View(messages);
         }
 
         public async Task<IActionResult> CreateMessage(string id, string message)
         {
-            var newMessage = new MyNamespace.CreateMessageChatRequest
+            var newMessage = new MyNamespace.CreateMessageSquadRequest
             {
+                SquadId = Guid.Parse(id),
                 UserFromId = SettingArray.MyUser.Id,
-                UserToId = Guid.Parse(id),
                 Message = message,
-                MessageTime = DateTime.UtcNow
+                MessageTime = DateTime.UtcNow,
+                SystemMessage = false,
             };
-            await client.CreateMessagesChatsAsync(newMessage);
+            await client.CreateMessageSquadAsync(newMessage);
             return Ok();
         }
     }
