@@ -139,11 +139,12 @@
 
 
         .text{
-            min-width: 340px;
+            min-width: 200px;
             max-width: 680px;
             min-height: 79px;
             background: @colors[18];
-            border-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
             font-family: 'Inter', sans-serif;
             font-style: normal;
             font-weight: 500;
@@ -162,7 +163,7 @@
         }
 
         .right{
-            margin-left: 1340px;
+            margin-left: 1470px;
         }
 
         .left{
@@ -228,6 +229,24 @@
             color: grey;
             text-align: center;
         }
+
+        .userName{
+            min-width: 200px;
+            max-width: 680px;
+            height: 32px;
+            background: @colors[18];
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 36px;
+            color: purple;
+            word-wrap: break-word;
+            padding: 10px;
+            text-align:center;
+        }
     </style>
     <title>@ViewData["Title"]</title>
     <script src="~/lib/signalr/dist/browser/signalr.js"></script>
@@ -263,7 +282,11 @@
             else if(item.UserFromId != LimqClient.Settings.SettingArray.MyUser.Id){
                 <div class="block">
                     <div class="message right">
-                        <div style=" background: @colors[16]; text-align:right;" class="text">@item.Message</div>
+                        <div class="context">
+                            <div style=" background: @colors[16]; " class="userName"> @item.UserName </div>
+                             <div style=" background: @colors[16]; text-align:right;" class="text">@item.Message</div>
+
+                        </div>
                         <div class="context">
                             <img style="margin-right: 10px; background: @colors[20];" class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Avatar))" />
                             <div class="time">@item.MessageTime.ToLocalTime().ToShortTimeString()</div>
@@ -276,10 +299,13 @@
                 <div class="block">
                     <div class="message left">
                         <div class="context">
-                            <img style="margin-left: 10px; background: @colors[19];" class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />
+                            <img style="margin-left: 10px; background: @colors[19];" class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Avatar))" />
                             <div class="time">@item.MessageTime.ToLocalTime().ToShortTimeString()</div>
                         </div>
-                        <div style="text-align:left;" class="text">@item.Message</div>
+                        <div class="context">
+                            <div style=" background: @colors[18];" class="userName"> @item.UserName </div>
+                            <div style="text-align:left;" class="text">@item.Message</div>
+                        </div>
                     </div>
                 </div>
             }
@@ -302,28 +328,33 @@
             .withUrl("https://localhost:7112/SquadHub")
             .build();
         connection.start().then(() => {
-            connection.invoke('JoinGroup', '@squad.Id.ToString()', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()');
+            connection.invoke('JoinGroup', '@squad.Id.ToString()');
         });
             
 
-        connection.on("SendMessage", (name, image, message, time) => {
-            
+        connection.on("SendMessage", (name, image,  message, time) => {
+
+            if (name != '@LimqClient.Settings.SettingArray.MyUser.UserName.ToString()') {
             var structure = [
                 '<div class="block" >',
-                '<div class="message right" >',
-                '<div style = " background: @colors[16]; text-align:right;" class= "text" >', message, '</div>',
-                '<div class="context" >',
-                '<img style="margin-right: 10px; background: @colors[20];" class= "avatar" src = "data:image/jpeg;base64,', image, ' " />',
-                '<div class="time" >', time ,'</div>',
-                '</div>',
+                    '<div class="message right" >',
+                        '<div class="context">',
+                            '<div style=" background: @colors[16]; " class= "userName" >', name ,'</div>',
+                            '<div style = " background: @colors[16]; text-align:right;" class= "text" >', message, '</div>',
+                        '</div>',
+                        '<div class="context" >',
+                            '<img style="margin-right: 10px; background: @colors[20];" class= "avatar" src = "data:image/jpeg;base64,', image , ' " />',
+                            '<div class="time" >', time ,'</div>',
+                        '</div>',
                 
-                '</div>',
+                    '</div>',
                 '</div>'
             ];
 
             $(structure.join('')).appendTo(".container");
             
             container.scrollTop = container.scrollHeight;
+            }
         });
         
         
@@ -341,13 +372,16 @@
         
             var structure = [
                 '<div class="block" >',
-                '<div class="message left" >',
-                '<div class="context" >',
-                '<img style="margin-left: 10px; background: @colors[19];" class= "avatar" src = "data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />',
-                '<div class="time" > @DateTime.Now.ToShortTimeString()</div>',
-                '</div>',
-                '<div style = "text-align:left;" class= "text" >', messageAdd, '</div>',
-                '</div>',
+                    '<div class="message left" >',
+                        '<div class="context" >',
+                            '<img style="margin-left: 10px; background: @colors[19];" class= "avatar" src = "data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />',
+                            '<div class="time" > @DateTime.Now.ToShortTimeString()</div>',
+                        '</div>',
+                        '<div class="context">',
+                            '<div style=" background: @colors[18];" class= "userName" > @LimqClient.Settings.SettingArray.MyUser.UserName </div>',
+                            '<div style = "text-align:left;" class= "text" >', messageAdd, '</div>',
+                        '</div>',
+                    '</div>',
                 '</div>'
             ];
 
@@ -356,7 +390,7 @@
             container.scrollTop = container.scrollHeight;
 
             connection.invoke('SendMessageToSquad', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()', idAdd, messageAdd, "@DateTime.UtcNow.ToString()");
-            connection.invoke('SendInSquad', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()', idAdd, messageAdd, "@DateTime.UtcNow.ToString()");
+            connection.invoke('SendInSquad', idAdd, messageAdd, "@DateTime.UtcNow.ToString()");
 
             document.getElementById("text").value = "";
         });

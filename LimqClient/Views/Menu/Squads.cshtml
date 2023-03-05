@@ -171,6 +171,7 @@
             margin-top: -110px;
             margin-left: 150px;
             color: @colors[1];
+            cursor: pointer;
         }
 
         .messageTime {
@@ -183,6 +184,7 @@
             margin: auto;
             margin-top: -35px;
             margin-left: 1650px;
+            cursor: pointer;
         }
 
         .message {
@@ -197,11 +199,14 @@
             margin-top: 15px;
             margin-left: 150px;
             overflow: hidden;
+            cursor: pointer;
         }
 
     </style>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -224,11 +229,11 @@
             {
                 @foreach (var squad in Model)
                 {
-                    <div class="chat">
+                    <div class="chat" id="@squad.Id">
                         <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(squad.Avatar))" />
                         <div class="Name " onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Name</div>
-                        <div class="messageTime @squad.Id.ToString()" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.MessageTime.ToLocalTime().ToShortTimeString()</div>
-                        <div class="message @squad.Id.ToString()" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Message</div>
+                        <div class="messageTime @squad.Id" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.MessageTime.ToLocalTime().ToShortTimeString()</div>
+                        <div class="message @squad.Id" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Message</div>
                     </div>
                 }
             }
@@ -244,7 +249,7 @@
 
         @foreach (var item in Model)
         {
-            @:connection.invoke('JoinGroup', '@item.Id.ToString()', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()');
+            @:connection.invoke('JoinGroup', '@item.Id.ToString()');
         }
 
                     })
@@ -256,6 +261,8 @@
         connection.on("ReceiveMessage", (squad, message, time) => {
             let result1 = document.getElementsByClassName("message " + squad);
             let result2 = document.getElementsByClassName("messageTime " + squad);
+            console.log(result1);
+            console.log(result2);
             if (result1.length > 0 && result2.length > 0) {
                 result1[0].textContent = message;
                 result2[0].textContent = time;
