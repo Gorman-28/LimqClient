@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "Settings Page";
+    string[] colors = ViewData["Theme"] as string[];
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        html, body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow-y: scroll;
+            background: @colors[13];
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        .container {
+            height: 90px;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container2 {
+            width: 1100px;
+            margin: 0 auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .butt {
+            heihgt: 137px;
+            width: 250px;
+            background: @colors[7];
+            border-radius: 20px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .settings {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            height: 125px;
+            background: @colors[12];
+        }
+
+        .image {
+            height: 120px;
+            width: 150px;
+            margin: 0 auto;
+            margin-top: -30px;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #chats {
+            background-image: url("../img/chatsChosenL.svg");
+        }
+
+        #group {
+            margin-top: -10px;
+            height: 80px;
+            width: 110px;
+            background-image: url("../img/groupsL.svg");
+        }
+
+        #settings {
+            margin-top: -5px;
+            height: 80px;
+            width: 100px;
+            background-image: url("../img/settingsL.svg");
+        }
+        .name{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 60px;
+            line-height: 73px;
+            text-align: center;
+
+            color: @colors[17];
+            margin-bottom: 60px;
+        }
+
+        .label{
+            width: 1010px;
+            height: 140px;
+            margin: 15px auto;
+            background: @colors[14];
+            border-radius: 20px;
+            display: flex;
+
+        }
+
+        .img{
+            height: 60px;
+            width: 60px;
+            margin: 10px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .profile{
+            background: url("~/wwwroot/img/profileL.png")
+        }
+
+
+
+        .inner{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 48px;
+            color: @colors[1];
+        }
+
+        .about{
+            width: 440px;
+            height: 100px;
+            background: @colors[4];
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 40px;
+            line-height: 48px;
+            margin: 25px auto;
+            background: @colors[14];
+        }
+    </style>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<body onselectstart="return false">
+    <div class="container">
+        <div class="butt" onclick="window.location='./Chats'"><div class="image" id="chats"></div></div>
+        <div class="butt" onclick="window.location='./Squads'"><div class="image" id="group"></div></div>
+        <div class="butt settings" ><div class="image" id="settings"></div></div>
+    </div>
+
+    <div class="container2">
+        <div class="name">Settings</div>
+        <div class="label">
+            <div class="img profile"></div>
+            <div class="inner">Profile</div>
+        </div>
+        <div class="label">
+            <div class="img options"></div>
+            <div class="inner">Options</div>
+        </div>
+        
+        <div class="about">About App</div>
+    </div>
+</body>
+
+</html>
