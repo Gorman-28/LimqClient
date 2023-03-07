@@ -24,7 +24,7 @@ namespace LimqClient.Controllers
                 var uniqUser = await client.CheckUserAsync(user.UserName);
                 if (uniqUser is null)
                 {
-                    var file = "./wwwroot/img/logo.png";
+                    var file = "./wwwroot/img/logoL.png";
                     using var stream = new MemoryStream(System.IO.File.ReadAllBytes(file).ToArray());
 
                     var avatar = new FormFile(stream, 0, stream.Length, "streamFile", file.Split(@"\").Last());

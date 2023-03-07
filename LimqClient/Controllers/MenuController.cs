@@ -34,5 +34,11 @@ namespace LimqClient.Controllers
             ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
             return View(squads);
         }
+
+        public async Task<IActionResult> Settings()
+        {
+            ViewData["Theme"] = Request.Cookies.ContainsKey("blackTheme") ? SettingArray.blackTheme : SettingArray.whiteTheme;
+            return View();
+        }
     }
 }

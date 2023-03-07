@@ -15,7 +15,7 @@
             width: 100%;
             height: 100%;
             margin: 0;
-            overflow-y: scroll;
+            overflow: hidden;
             background: @colors[13];
         }
 
@@ -32,12 +32,24 @@
             justify-content: space-between;
         }
 
+        .field {
+            box-sizing: border-box;
+            width: 100%;
+            height: 1080px;
+            max-height: max-content;
+            margin: 0 auto;
+            margin-top: 30px;
+            background: @colors[12];
+            border-top-left-radius: 78px;
+            border-top-right-radius: 78px;
+            position: relative;
+            z-index: 1;
+        }
         .container2 {
             width: 1100px;
             margin: 0 auto;
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
+           
+            
         }
 
         .butt {
@@ -91,32 +103,30 @@
             text-align: center;
 
             color: @colors[17];
-            margin-bottom: 60px;
+            padding: 60px 0;
         }
 
         .label{
             width: 1010px;
             height: 140px;
-            margin: 15px auto;
+            margin: 50px auto;
             background: @colors[14];
             border-radius: 20px;
             display: flex;
-
+            cursor: pointer;
         }
 
         .img{
-            height: 60px;
-            width: 60px;
-            margin: 10px;
+            height: 100px;
+            width: 100px;
+            margin: 15px;
             background-size: cover;
             background-repeat: no-repeat;
         }
 
         .profile{
-            background: url("~/wwwroot/img/profileL.png")
+            background-image: url("../img/profileL.svg")
         }
-
-
 
         .inner{
             font-family: 'Inter', sans-serif;
@@ -125,6 +135,12 @@
             font-size: 40px;
             line-height: 48px;
             color: @colors[1];
+            margin: auto;
+            margin-left: 310px;
+        }
+
+        .opt{
+            margin-left: 300px;
         }
 
         .about{
@@ -135,38 +151,457 @@
             font-style: normal;
             font-weight: 600;
             font-size: 40px;
-            line-height: 48px;
-            margin: 25px auto;
+            line-height: 96px;
+            margin: auto;
+            margin-top: 50px;
+            color: @colors[14];
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .profileField{
+            position: absolute;
+            width: 1100px;
+            height: 840px;
+            left: calc(50% - 550px);
+            top: 80px;
+            z-index: 2;
+            background: @colors[15];
+            box-shadow: 0px 0px 10px 10px @colors[2];
+            border-radius: 30px;
+            display: none;
+        }
+
+        .back{
+            width: 39px;
+            height: 69px;
+            margin: 40px;
+            margin-left: 55px;
+            background-image: url("../img/arrowL.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .text{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 50px;
+            line-height: 61px;
+            color: @colors[17];
+            margin: 40px auto;
+            margin-left: 350px;
+        }
+
+        .info{
+            margin: auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar{
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            margin-left: -120px;
+        }
+
+        input{
+            outline: none;
+            border: none;
+        }
+        
+        input:focus{
+            outline: none;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file{
+            width: 173px;
+            height: 173px;
+            left: 141px;
+            top: 210px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: @colors[17];
+            border-radius: 50%;
+            margin: 0 auto;
+            margin-top: 40px;
+            cursor: pointer
+        }
+
+        .text2{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 35px;
+            line-height: 42px;
+            color: @colors[1];
+            
+        }
+
+        .property{
+            width: 545px;
+            height: 67px;
             background: @colors[14];
+            border-radius: 20px;
+            margin: 10px auto;
+            padding-left: 10px;
+        }
+
+        .valueFields{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bottomText{
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
+            color: @colors[17];
+            margin: 0 auto;
+            margin-top: 10px;
+            
+        }
+
+        .changePassword{
+            width: 424px;
+            height: 60px;
+            background: @colors[18];
+            border-radius: 20px;
+            margin: 40px auto;
+            padding-top: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .deleteAccount{
+            width: 269px;
+            height: 60px;
+            background: #D22E2E;
+            border-radius: 20px;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding-top: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .logOut{
+            width: 104px;
+            height: 104px;
+            margin-left: 1000px;
+            margin-top: 20px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("../img/logoutL.png");
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .passwordField{
+            display: none;
+            position: absolute;
+            width: 860px;
+            height: 460px;
+            left: calc(50% - 430px);
+            top: 200px;
+            background: @colors[15];
+            box-shadow: 0px 0px 5px 2px @colors[3];
+            border-radius: 30px;
+        }
+
+        .pass{
+            width: 240px;
+            height: 65px;
+        }
+
+        .renovate{
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 36px;
+            color: @colors[17];
+            margin-left: 150px;
+        }
+
+        .mode{
+            width: 620px;
+            background: none;
+            cursor: context-menu;
+            display: flex;
+            margin-top: 100px;
+            justify-content: space-around;
+        }
+
+        .modeText{
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 45px;
+            line-height: 54px;
+            color: @colors[17];
+        }
+
+        .modeSwitch{
+            width: 170px;
+            height: 60px;
+            background: @colors[1];
+            border: 3px solid @colors[14];
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .circle{
+            height: 60px;
+            width: 60px;
+            position: absolute;
+            border-radius: 50%;
+            background: @colors[17];
         }
     </style>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    
 </head>
 
 <body onselectstart="return false">
-    <div class="container">
-        <div class="butt" onclick="window.location='./Chats'"><div class="image" id="chats"></div></div>
-        <div class="butt" onclick="window.location='./Squads'"><div class="image" id="group"></div></div>
-        <div class="butt settings" ><div class="image" id="settings"></div></div>
+    <div id="main">
+        <div class="container">
+            <div class="butt" onclick="window.location='./Chats'"><div class="image" id="chats"></div></div>
+            <div class="butt" onclick="window.location='./Squads'"><div class="image" id="group"></div></div>
+            <div class="butt settings" ><div class="image" id="settings"></div></div>
+        </div>
+        <div class="field">
+            <div class="container2">
+                <div class="name">Settings</div>
+                <div class="label" id="profile">
+                    <div class="img profile"></div>
+                    <div class="inner">Profile</div>
+                </div>
+                <div class="label mode">
+                    <div class="modeText">Dark mode:</div>
+                    <div id="modeSwitch" class="modeSwitch">
+                        <div id="circle" class="circle"></div>
+                    </div>
+                </div>
+        
+                <div class="about">About App</div>
+            </div>
+        </div>
     </div>
 
-    <div class="container2">
-        <div class="name">Settings</div>
-        <div class="label">
-            <div class="img profile"></div>
-            <div class="inner">Profile</div>
-        </div>
-        <div class="label">
-            <div class="img options"></div>
-            <div class="inner">Options</div>
-        </div>
+        <div class="profileField" >
+            <div style="display: flex;">
+                <div class="back"></div>
+                <div class="text">Profile</div>
+            </div>
+
+            <div class="info">
+                <div class="avatar">
+                    <label class="custom-file">
+                        <img style="background-size: cover;  width: 173px; height: 173px;  border-radius: 50%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />
+                        <input id="avatar" type="file" onchange="ImageFile()"/>
+                
+                    </label>
+                    <div class="bottomText"> Set New Photo</div>
+
+                </div>
+                <div class="valueFields">
+                    <input type="text" id="userName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.UserName" />
+                    <input type="text" id="firstName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.FirstName" />
+                    <input type="text" id="lastName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.LastName" />
+                    <div class="bottomText">Enter your name and add an optional profile photo </div>
+                </div>
+
+            </div>
+
+            <div id="changePassword" class="changePassword text2">Change Password</div>
+
+
+            <div id="deleteAccount" class="deleteAccount text2">Delete Profile</div>
         
-        <div class="about">About App</div>
-    </div>
+            <div id="logOut" class="logOut"></div>
+
+        </div>
+
+        <div id="passwordField" class="passwordField">
+            <div class="back"></div>
+            <input id="oldPassword" class="property renovate" placeholder="Enter old password" />
+            <input id="newPassword" class="property renovate" placeholder="Enter new password"  />
+
+            <div class="changePassword text2 pass">Change</div>
+        </div>
+
+
+    <script defer>
+        
+        let blackTheme = ('@LimqClient.Settings.SettingArray.MyUser.Theme' === 'True');
+
+        let main = document.getElementById("main");
+        let profileButton = document.getElementById("profile");
+        let modeSwitch = document.getElementById("modeSwitch");
+        let circle = document.getElementById("circle");
+        let profileField = document.getElementsByClassName("profileField")[0];
+        let back1 = document.getElementsByClassName("back")[0];
+        let back2 = document.getElementsByClassName("back")[1];
+
+        let userName = document.getElementById("userName").value;
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+      
+
+        let logOut = document.getElementById("logOut");
+        let deleteAccount = document.getElementById("deleteAccount");
+        let changePassword1 = document.getElementsByClassName("changePassword")[0];
+        let changePassword2 = document.getElementsByClassName("changePassword")[1];
+
+        let passwordField = document.getElementById("passwordField");
+        //let avatar = document.getElementById("avatar");
+
+        if (!blackTheme) {
+            circle.style.left = 0 + 'px';
+        }
+        else{
+            circle.style.left = 114 + 'px';
+        }
+
+        profileButton.addEventListener("click", ()=>{
+            profileField.style.display = "block";
+            main.style.pointerEvents = "none";
+            main.style.backdropFilter = "blur(10px)";
+        });
+
+        modeSwitch.addEventListener("click", () =>{
+            let start = Date.now();
+            let position;
+            if (blackTheme) {
+                position = 114;
+                let timer = setInterval(function () {
+                    let timePassed = Date.now() - start;
+
+                    if (position <-4) {
+                        clearInterval(timer); 
+                        return;
+                    }
+
+                    else{
+                        circle.style.left = position + 'px';
+                        position-=2;
+                    }
+                }, 2);
+
+                $.ajax({
+                    url: '@Url.Action("ChangeTheme","Settings")',
+                    data: { theme: false }
+                });
+
+               
+            }
+            else{
+                position = -4;
+                let timer = setInterval(function () {
+                    let timePassed = Date.now() - start;
+
+                    if (position >114) {
+                        clearInterval(timer);
+                        return;
+                    }
+
+                    else {
+                        circle.style.left = position + 'px';
+                        position += 2;
+                    }
+                }, 2);
+                
+                $.ajax({
+                    url: '@Url.Action("ChangeTheme","Settings")',
+                    data: { theme: true }
+                });
+
+               
+            }
+
+            setTimeout(() =>{ location.href = location.href; } , 30);
+        });
+
+        back1.addEventListener("click", ()=>{
+            if (userName != document.getElementById("userName").value) {
+                $.ajax({
+                    url: '@Url.Action("ChangeUserName","Settings")',
+                    data: { newUserName: document.getElementById("userName").value }
+                });
+            }
+
+            if (firstName != document.getElementById("firstName").value) {
+                $.ajax({
+                    url: '@Url.Action("ChangeFirstName","Settings")',
+                    data: { newFirstName: document.getElementById("firstName").value }
+                });
+            }
+
+            if (lastName != document.getElementById("lastName").value) {
+                $.ajax({
+                    url: '@Url.Action("ChangeLastName","Settings")',
+                    data: { newLastName: document.getElementById("lastName").value }
+                });
+            }
+            main.style.pointerEvents = "auto";
+            profileField.style.display = "none";
+            main.style.backdropFilter = "blur(0)";
+        });
+
+        changePassword1.addEventListener("click", () => {
+            profileField.style.display = "none";
+            passwordField.style.display = "block";
+        });
+
+        back2.addEventListener("click", () => {
+            profileField.style.display = "block";
+            passwordField.style.display = "none";
+        });
+
+        changePassword2.addEventListener("click", () => {
+            $.ajax({
+                url: '@Url.Action("ChangePassword","Settings")',
+                data: { oldPassword: document.getElementById("oldPassword").value, newPassword: document.getElementById("newPassword").value }
+            });
+        });
+
+        logOut.addEventListener("click", () =>{
+            window.location.href = "../Settings/LogOut";
+        });
+
+        deleteAccount.addEventListener("click", () => {
+            window.location.href = "../Settings/Delete";
+        });
+
+        //function ImageFile() {
+        //    var file = $('#avatar').get(0).files;
+        //    let data = new FormData;
+        //    data.append("ImageFile", file[0]);
+        //    console.log(data);
+        //    $.ajax({
+        //        url: 'Url.Action("ChangeAvatar","Settings")',
+        //        data: { newAvatar: data },
+        //        contentType: false,
+        //        processData: false
+                
+        //    });
+        //    console.log("work");
+        //}
+    </script>
 </body>
 
 </html>

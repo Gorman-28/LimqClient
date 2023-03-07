@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Settings\" />
-    <Folder Include="wwwroot\img\" />
+    <Compile Remove="Views\Settings\**" />
+    <Content Remove="Views\Settings\**" />
+    <EmbeddedResource Remove="Views\Settings\**" />
+    <None Remove="Views\Settings\**" />
   </ItemGroup>
 
   <ItemGroup>
