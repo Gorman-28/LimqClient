@@ -41,7 +41,7 @@
                 margin: 0 auto;
                 margin-top: 20px;
                 display: flex;
-                justify-content: space-between;
+                
                 
             }
 
@@ -82,21 +82,21 @@
             }
 
             #chats{
-                background-image: url("../img/chatsChosenL.svg");
+                background-image: url("../img/@colors[26]");
             }
 
             #group{
                 margin-top: -10px;
                 height: 80px;
                 width: 110px;
-                background-image: url("../img/groupsL.svg");
+                background-image: url("../img/@colors[22]");
             }
 
             #settings{
                 margin-top: -5px;
                 height: 80px;
                 width: 100px;
-                background-image: url("../img/settingsL.svg");
+                background-image: url("../img/@colors[23]");
             }
 
             .lock{
@@ -105,7 +105,8 @@
                 margin-top: -12px;
                 height: 115px;
                 width: 145px;
-                background-image: url("../img/closedLockL.svg");
+                background-image: url("../img/@colors[24]");
+                background: none;
                 cursor: pointer;
             }
 
@@ -115,7 +116,7 @@
                 margin-top: 7px;
                 height: 110px;
                 width: 100px;
-                background-image: url("../img/addL.svg");
+            background-image: url("../img/@colors[25]");
                 cursor: pointer;
             }
 
@@ -144,7 +145,7 @@
            
             .chat{
                 
-                width: 1756px;
+                width: 100%;
                 height: 116px;
                 margin: 0 auto;
                 margin-top: 30px;
@@ -206,6 +207,101 @@
                 cursor: pointer;
             }
 
+            .createChat{
+                display: none;
+                position: absolute;
+                width: 920px;
+                height: 650px;
+                left: calc(50% - 460px);
+                top: 118px;
+                background: @colors[15];
+                box-shadow: 0px 0px 5px 2px @colors[2];
+                border-radius: 30px;
+                overflow-y : scroll;
+            }
+
+            .back {
+                width: 34px;
+                height: 60px;
+                margin: 40px;
+                margin-left: 55px;
+                background-image: url("../img/@colors[29]");
+                background-repeat: no-repeat;
+                background-size: cover;
+                cursor: pointer;
+            }
+
+            .text {
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 50px;
+                line-height: 61px;
+                color: @colors[17];
+                margin: 40px auto;
+                margin-left: 220px;
+            }
+
+            .selectPerson{
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 36px;
+                color: @colors[17];
+                margin-bottom: 20px;
+                margin-left: 360px;
+            }
+
+            .personSearch{
+                background: none;
+                border: none;
+                width: 550px;
+                height: 60px;
+                margin-top: 10px;
+                margin-left: 180px;
+                background: @colors[14];
+                border-radius: 20px;
+
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 35px;
+                line-height: 42px;
+
+                text-align:center;
+                color: @colors[1];
+            }
+
+            .personSearch:focus{
+                outline: none;
+            }
+
+            .rewrite{
+                width: 550px;
+            }
+
+            .clickable{
+                cursor: pointer;
+            }
+
+            .fullName{
+                width: 400px;
+                font-family: 'Inter', sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 35px;
+                color: @colors[1];
+                margin-top: 15px;
+                margin-left: 150px;
+                overflow: hidden;
+               
+
+                display: flex;
+                flex-direction: row;
+            }
+
         </style>
         <title>@ViewData["Title"]</title>
         <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
@@ -215,6 +311,7 @@
     </head>
 
 <body onselectstart="return false">
+    <div class ="main">
         <div class="container">
             <div class="butt chats" ><div class="image" id="chats"></div></div>
             <div class="butt" onclick="window.location='./Squads'"><div class="image" id="group"></div></div>
@@ -224,51 +321,101 @@
         <div class="field">
             <div class="container">
                 <div class="image lock"></div>
-                <input class="chatSearch" />
-                <div class="image add"></div>
+                <input id="chatSearch" class="chatSearch" />
+                <div id="add" class="image add"></div>
             </div>
 
-            <div class="container2">
-                @if (Model != null)
-                {
-                    @foreach (var chat in Model)
-                    {
-
-                        <div class="chat" id="@chat.Id">
-                            <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
-                        <div class="userName" onclick="window.location='../Chat/Main/@chat.Id.ToString()';">@chat.UserName</div>
-                        <div class="messageTime @chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.MessageTime.ToLocalTime().ToShortTimeString()</div>
-                        <div class="message @chat.Id"  onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.Message</div>
-                        </div>
-                    }
-
-                <div class="chat"></div>
-                <div class="chat"></div>
-                <div class="chat"></div>
-                <div class="chat"></div>
-                <div class="chat"></div>
-                <div class="chat"></div>
-                <div class="chat"></div>
-                }
+            <div id="chatsResult" class="container2">
 
             </div>
-        </div>
+            </div>
+    </div>
+            <div class="createChat">
+                <div style="display: flex;">
+                    <div class="back"></div>
+                    <div class="text">New Chat</div>
+                </div>
 
-    <script>
+            <div class="selectPerson">Select person: </div>
+            <input id="personSearch" type="text" maxlength="20" class="personSearch" />
+
+            <div id="rewrite" class="container2 rewrite">
+            
+           
+            </div>
+
+            </div>
+
+        
+
+    <script defer>
         "use strict";
+
+        let add = document.getElementById("add");
+        let personSearch = document.getElementById("personSearch");
+        let chatSearch = document.getElementById("chatSearch");
+        let back = document.getElementsByClassName("back")[0];
+        let main = document.getElementsByClassName("main")[0];
+        let createChat = document.getElementsByClassName("createChat")[0];
+        
+        $.ajax({
+            url: '@Url.Action("GetChats","Chat")',
+            success: function (data) {
+                $("#chatsResult").html(data);
+            }
+        });
+        
+        add.addEventListener("click", () => {
+            createChat.style.display = "block";
+            main.style.pointerEvents = "none";
+            main.style.filter = "blur(4px)";
+        });
+
+        back.addEventListener("click", () => {
+            createChat.style.display = "none";
+            main.style.pointerEvents = "auto";
+            main.style.filter = "blur(0px)";
+        });
+
+        personSearch.addEventListener("keydown", ()=>{
+            if(personSearch.value.length >= 2){
+                
+                $.ajax({
+                    url: '@Url.Action("FindUser","Chat")',
+                    data: { name: personSearch.value },
+                    success: function (data){
+                        $("#rewrite").html(data);
+                    }
+                });
+            }
+        });
+
+        chatSearch.addEventListener("keydown", () => {
+            if (chatSearch.value.length >= 2) {
+
+                $.ajax({
+                    url: '@Url.Action("GetChatsWithName","Chat")',
+                    data: { name: chatSearch.value },
+                    success: function (data) {
+                        $("#chatsResult").html(data);
+                    }
+                });
+            }
+        });
+
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("https://localhost:7112/ChatHub")
             .build();
         connection.start().then(() => { 
-                
+        @if (Model.Count != 0)
+        {
             @foreach(var item in Model){
                 @:connection.invoke('JoinGroup', '@item.Id.ToString()', '@LimqClient.Settings.SettingArray.MyUser.Id.ToString()');
             }
-               
-            })
-            .catch(err => alert(err.toString()));
+        }
+            }).catch(err => alert(err.toString()));
 
-
+        
         
         
         connection.on("ReceiveMessage", (user, message, time) => {

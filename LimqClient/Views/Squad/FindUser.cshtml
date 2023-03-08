@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MyNamespace.GetUsersDto>
+
+@foreach (var user in Model)
+{
+    if (user.Id != LimqClient.Settings.SettingArray.MyUser.Id)
+    {
+        <div id="@user.Id.ToString()" style="border: none;" class="chat clickable" onclick="SelectUser('@user.Id.ToString()')">
+            <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(user.Avatar))" />
+            <div class="Name">@user.UserName</div>
+            <div class="fullName">
+                <div class="firstName"> @user.FirstName</div>
+                <div class="LastName"> @user.LastName</div>
+            </div>
+        </div>
+    }
+}
+
+<script defer>
+    function SelectUser(userId) {
+        let user = document.getElementById(userId); 
+        if (user.style.border == "none") {
+            user.style.border = "2px solid lightgreen";
+            arr.push(userId);
+            
+        }
+        else {
+            user.style.border = "none";
+            var index = arr.indexOf(userId);
+            if (index > -1) {
+                arr.splice(index, 1);
+               
+            }
+        }
+
+        if (arr.length > 0) {
+            submitBtn.style.display = "block";
+           
+        }
+
+        else {
+            submitBtn.style.display = "none";
+            
+        }
+
+    }
+
+
+    
+
+</script>

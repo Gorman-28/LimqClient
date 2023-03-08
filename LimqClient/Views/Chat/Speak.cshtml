@@ -57,7 +57,7 @@
             height: 69px;
             margin: 40px auto;
             margin-left: 55px;
-            background-image: url("../img/arrowL.svg");
+            background-image: url("../img/@colors[29]");
             background-repeat: no-repeat;
             background-size: cover;
             cursor: pointer;
@@ -208,6 +208,8 @@
         }
 
         #send{
+            border: none;
+            background: none;
             height: 110px;
             width: 110px;
             background-image: url("../img/send.png");
@@ -273,7 +275,7 @@
       <div class="chatBox">
           <div class="heart"></div>
           <textarea type="text" maxlength="255" id="text"></textarea>
-          <input type="submit" id="send" />
+          <input type="submit" id="send" value=""/>
       </div>
       
 
@@ -313,8 +315,10 @@
         
         document.getElementById("send").addEventListener('click', () =>{
 
+            
             let idAdd = '@chat.Id.ToString()';
             let messageAdd = document.getElementById("text").value;
+            if (messageAdd.value !== '')
             $.ajax({
                 url: '@Url.Action("CreateMessage","Chat")',
                 data: { id: idAdd, message: messageAdd }

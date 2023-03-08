@@ -78,21 +78,21 @@
         }
 
         #chats {
-            background-image: url("../img/chatsChosenL.svg");
+            background-image: url("../img/@colors[21]");
         }
 
         #group {
             margin-top: -10px;
             height: 80px;
             width: 110px;
-            background-image: url("../img/groupsL.svg");
+            background-image: url("../img/@colors[22]");
         }
 
         #settings {
             margin-top: -5px;
             height: 80px;
             width: 100px;
-            background-image: url("../img/settingsL.svg");
+            background-image: url("../img/@colors[28]");
         }
         .name{
             font-family: 'Inter', sans-serif;
@@ -125,7 +125,7 @@
         }
 
         .profile{
-            background-image: url("../img/profileL.svg")
+            background-image: url("../img/@colors[30]");
         }
 
         .inner{
@@ -178,7 +178,7 @@
             height: 69px;
             margin: 40px;
             margin-left: 55px;
-            background-image: url("../img/arrowL.svg");
+            background-image: url("../img/@colors[29]");
             background-repeat: no-repeat;
             background-size: cover;
             cursor: pointer;
@@ -302,7 +302,7 @@
             margin-top: 20px;
             background-repeat: no-repeat;
             background-size: cover;
-            background-image: url("../img/logoutL.png");
+            background-image: url("../img/logOutL.png");
             border-radius: 50%;
             cursor: pointer;
         }
@@ -310,6 +310,7 @@
         .passwordField{
             display: none;
             position: absolute;
+            z-index: 3;
             width: 860px;
             height: 460px;
             left: calc(50% - 430px);
@@ -419,9 +420,9 @@
 
                 </div>
                 <div class="valueFields">
-                    <input type="text" id="userName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.UserName" />
-                    <input type="text" id="firstName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.FirstName" />
-                    <input type="text" id="lastName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.LastName" />
+                    <input type="text" maxlength="20" id="userName" class="property text2"  value="@LimqClient.Settings.SettingArray.MyUser.UserName" />
+                    <input type="text" maxlength="20" id="firstName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.FirstName" />
+                    <input type="text" maxlength="20" id="lastName" class="property text2" value="@LimqClient.Settings.SettingArray.MyUser.LastName" />
                     <div class="bottomText">Enter your name and add an optional profile photo </div>
                 </div>
 
@@ -438,14 +439,14 @@
 
         <div id="passwordField" class="passwordField">
             <div class="back"></div>
-            <input id="oldPassword" class="property renovate" placeholder="Enter old password" />
-            <input id="newPassword" class="property renovate" placeholder="Enter new password"  />
+            <input maxlength="20" id="oldPassword" class="property renovate" placeholder="Enter old password" />
+            <input maxlength="20" id="newPassword" class="property renovate" placeholder="Enter new password" />
 
             <div class="changePassword text2 pass">Change</div>
         </div>
 
 
-    <script defer>
+    <script>
         
         let blackTheme = ('@LimqClient.Settings.SettingArray.MyUser.Theme' === 'True');
 
@@ -480,7 +481,7 @@
         profileButton.addEventListener("click", ()=>{
             profileField.style.display = "block";
             main.style.pointerEvents = "none";
-            main.style.backdropFilter = "blur(10px)";
+            main.style.filter  = "blur(4px)";
         });
 
         modeSwitch.addEventListener("click", () =>{
@@ -505,6 +506,10 @@
                 $.ajax({
                     url: '@Url.Action("ChangeTheme","Settings")',
                     data: { theme: false }
+                }).done(function (){
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 100);
                 });
 
                
@@ -528,12 +533,16 @@
                 $.ajax({
                     url: '@Url.Action("ChangeTheme","Settings")',
                     data: { theme: true }
+                }).done(function (){
+                    setTimeout(() => {
+                        window.location.reload();
+                    } , 100);
                 });
 
                
             }
 
-            setTimeout(() =>{ location.href = location.href; } , 30);
+           
         });
 
         back1.addEventListener("click", ()=>{
@@ -559,16 +568,18 @@
             }
             main.style.pointerEvents = "auto";
             profileField.style.display = "none";
-            main.style.backdropFilter = "blur(0)";
+            main.style.filter = "blur(0px)";
         });
 
         changePassword1.addEventListener("click", () => {
-            profileField.style.display = "none";
+            profileField.style.pointerEvents = "none";
+            profileField.style.filter = "blur(4px)";
             passwordField.style.display = "block";
         });
 
         back2.addEventListener("click", () => {
-            profileField.style.display = "block";
+            profileField.style.pointerEvents = "auto";
+            profileField.style.filter = "blur(0px)";
             passwordField.style.display = "none";
         });
 

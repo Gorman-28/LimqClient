@@ -1,0 +1,12 @@
+﻿@model ICollection<MyNamespace.GetAllChatsDto>
+
+@foreach (var chat in Model)
+{
+
+    <div class="chat" id="@chat.Id" oncontextmenu="">
+        <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(chat.Avatar))" />
+        <div class="userName" onclick="window.location='../Chat/Main/@chat.Id.ToString()';">@chat.UserName</div>
+        <div class="messageTime @chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.MessageTime.ToLocalTime().ToShortTimeString()</div>
+        <div class="message @chat.Id" onclick="window.location.href='../Chat/Main/@chat.Id.ToString()';">@chat.Message</div>
+    </div>
+}

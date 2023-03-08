@@ -157,12 +157,12 @@ namespace MyNamespace
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Unit> CreateSquadAsync(string name, FileParameter avatar, System.Guid? adminId);
+        System.Threading.Tasks.Task<System.Guid> CreateSquadAsync(string name, FormFile avatar, System.Guid? adminId);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Unit> CreateSquadAsync(string name, FileParameter avatar, System.Guid? adminId, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> CreateSquadAsync(string name, FormFile avatar, System.Guid? adminId, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1582,7 +1582,8 @@ namespace MyNamespace
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Unit> CreateSquadAsync(string name, FileParameter avatar, System.Guid? adminId)
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Guid> CreateSquadAsync(string name, FormFile avatar, System.Guid? adminId)
         {
             return CreateSquadAsync(name, avatar, adminId, System.Threading.CancellationToken.None);
         }
@@ -1590,7 +1591,7 @@ namespace MyNamespace
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Unit> CreateSquadAsync(string name, FileParameter avatar, System.Guid? adminId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Guid> CreateSquadAsync(string name, FormFile avatar, System.Guid? adminId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/squads/CreateSquad");
@@ -1617,10 +1618,14 @@ namespace MyNamespace
                         throw new System.ArgumentNullException("avatar");
                     else
                     {
-                        var content_avatar_ = new System.Net.Http.StreamContent(avatar.Data);
-                        if (!string.IsNullOrEmpty(avatar.ContentType))
-                            content_avatar_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse(avatar.ContentType);
-                        content_.Add(content_avatar_, "Avatar", avatar.FileName ?? "Avatar");
+                        byte[] imageData = null;
+
+                        using (var binaryReader = new BinaryReader(avatar.OpenReadStream()))
+                        {
+                            imageData = binaryReader.ReadBytes((int)avatar.Length);
+                        }
+                        ByteArrayContent bytes = new ByteArrayContent(imageData);
+                        content_.Add(bytes, "Avatar", avatar.FileName ?? "Avatar");
                     }
 
                     if (adminId == null)
@@ -1656,7 +1661,7 @@ namespace MyNamespace
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Unit>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);

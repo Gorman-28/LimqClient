@@ -81,21 +81,21 @@
         }
 
         #chats {
-            background-image: url("../img/chatsL.svg");
+            background-image: url("../img/@colors[21]");
         }
 
         #group {
             margin-top: -10px;
             height: 80px;
             width: 110px;
-            background-image: url("../img/groupsChosenL.svg");
+            background-image: url("../img/@colors[27]");
         }
 
         #settings {
             margin-top: -5px;
             height: 80px;
             width: 100px;
-            background-image: url("../img/settingsL.svg");
+            background-image: url("../img/@colors[23]");
         }
 
         .lock {
@@ -104,7 +104,8 @@
             margin-top: -12px;
             height: 115px;
             width: 145px;
-            background-image: url("../img/closedLockL.svg");
+            background-image: url("../img/@colors[24]");
+            background: none;
             cursor: pointer;
         }
 
@@ -114,11 +115,11 @@
             margin-top: 7px;
             height: 110px;
             width: 100px;
-            background-image: url("../img/addL.svg");
+            background-image: url("../img/@colors[25]");
             cursor: pointer;
         }
 
-        .chatSearch {
+        .squadSearch {
             background: none;
             border: none;
             height: 61px;
@@ -147,6 +148,8 @@
             margin-top: 30px;
             background: @colors[14];
             border-radius: 20px;
+            box-sizing: border-box;
+            border: none;
         }
 
         .avatar {
@@ -202,6 +205,170 @@
             cursor: pointer;
         }
 
+        .createSquad {
+            display: none;
+            position: absolute;
+            width: 920px;
+            height: 650px;
+            left: calc(50% - 460px);
+            top: 118px;
+            background: @colors[15];
+            box-shadow: 0px 0px 5px 2px @colors[2];
+            border-radius: 30px;
+            overflow-y: scroll;
+        }
+
+        .back {
+            width: 34px;
+            height: 60px;
+            margin: 40px;
+            margin-left: 55px;
+            background-image: url("../img/@colors[29]");
+            background-repeat: no-repeat;
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .text {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 50px;
+            line-height: 61px;
+            color: @colors[17];
+            margin: 40px auto;
+            margin-left: 220px;
+        }
+
+        .info {
+            margin: auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar2 {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin-left: 60px;
+        }
+
+        input {
+            outline: none;
+            border: none;
+            background: none;
+        }
+
+            input:focus {
+                outline: none;
+            }
+
+            input[type="file"] {
+                display: none;
+            }
+
+        .custom-file {
+            width: 150px;
+            height: 150px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #B28264;
+            border-radius: 50%;
+            margin: 0 auto;
+            margin-top: 40px;
+            cursor: pointer;
+        }
+
+        .bottomText {
+            font-family: 'Inter';
+            width: 300px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 36px;
+            text-align: center;
+            color: #B28264;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-bottom: 3px solid #B28264;
+        }
+
+        .personSearch {
+            background: none;
+            border: none;
+            width: 450px;
+            height: 60px;
+            margin-top: 10px;
+            margin-left: 60px;
+            background: rgba(178, 130, 100, 0.4);
+            border-radius: 20px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 35px;
+            line-height: 42px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .personSearch:focus {
+            outline: none;
+        }
+
+        .rewrite {
+            width: 400px;
+        }
+
+        .clickable{
+            width: 400px;
+            margin-left: 20px;
+        }
+
+        .fullName {
+            width: 400px;
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 35px;
+            color: @colors[1];
+            margin-top: 15px;
+            margin-left: 150px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #submitBtn {
+            display: none;
+            border: none;
+            width: 219px;
+            height: 50px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background: @colors[7];
+            border-radius: 20px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px 2px @colors[2];
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 42px;
+            color: @colors[11];
+            cursor: pointer;
+            transition: box-shadow linear .2s;
+        }
+
+        #submitBtn:hover {
+            box-shadow: 0px 4px 4px 4px @colors[2];
+        }
+
+        #submitBtn:active {
+            box-shadow: inset 0px 10px 20px 2px @colors[2];
+        }
+
     </style>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/ChatsAdaptive.css" />
@@ -211,37 +378,139 @@
 </head>
 
 <body onselectstart="return false">
-    <div class="container">
-        <div class="butt" onclick="window.location='./Chats'"><div class="image" id="chats"></div></div>
-        <div class="butt chats"><div class="image" id="group"></div></div>
-        <div class="butt" onclick="window.location='./Settings'"><div class="image" id="settings"></div></div>
-    </div>
+    
 
-    <div class="field">
+    <div class="main">
         <div class="container">
-            <div class="image lock"></div>
-            <input class="chatSearch"></input>
-            <div class="image add"></div>
+            <div class="butt" onclick="window.location='./Chats'"><div class="image" id="chats"></div></div>
+            <div class="butt chats"><div class="image" id="group"></div></div>
+            <div class="butt" onclick="window.location='./Settings'"><div class="image" id="settings"></div></div>
         </div>
 
-        <div class="container2">
-            @if (Model != null)
-            {
-                @foreach (var squad in Model)
-                {
-                    <div class="chat" id="@squad.Id">
-                        <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(squad.Avatar))" />
-                        <div class="Name " onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Name</div>
-                        <div class="messageTime @squad.Id" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.MessageTime.ToLocalTime().ToShortTimeString()</div>
-                        <div class="message @squad.Id" onclick="window.location='../Squad/Main/@squad.Id.ToString()';">@squad.Message</div>
-                    </div>
-                }
-            }
+        <div class="field">
+            <div class="container">
+                <div class="image lock"></div>
+                <input id="squadSearch" class="squadSearch"></input>
+                <div id="add" class="image add"></div>
+            </div>
 
+            <div id="squadResult" class="container2">
+            
+
+            </div>
         </div>
     </div>
+    <div class="createSquad">
+        <div style="display: flex;">
+            <div class="back"></div>
+            <div class="text">New Group</div>
+        </div>
+
+        <div class="info">
+            <div class="avatar2">
+                <label class="custom-file">
+                    <img style="background-size: cover;  width: 150px; height: 150px;  border-radius: 50%;" src="data:image/jpeg;base64,@(Convert.ToBase64String(LimqClient.Settings.SettingArray.MyUser.Avatar))" />
+                    <input id="avatar" type="file" onchange="ImageFile()" />
+
+                </label>
+                <input type="text" min="3" maxlength="20" placeholder="Name of the group" class="bottomText"> </input>
+
+                <input id="submitBtn" type="submit" value="Create" />
+
+            </div>
+
+            <script defer>
+                let arr = [];
+                let submitBtn = document.getElementById("submitBtn");
+            </script>
+
+            <div style="display: flex; flex-direction: column;">
+                <input id="personSearch" type="text" maxlength="20" class="personSearch" />
+
+                <div id="rewrite" class="container2 rewrite">
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    
+
+
     <script>
         "use strict";
+
+        let add = document.getElementById("add");
+        let squadSearch = document.getElementById("squadSearch");
+        let personSearch = document.getElementById("personSearch");
+
+        let back = document.getElementsByClassName("back")[0];
+        let main = document.getElementsByClassName("main")[0];
+        let createSquad = document.getElementsByClassName("createSquad")[0];
+        let squadName = document.getElementsByClassName("bottomText")[0];
+
+        $.ajax({
+            url: '@Url.Action("GetSquads","Squad")',
+            success: function (data) {
+                $("#squadResult").html(data);
+            }
+        });
+
+        add.addEventListener("click", () => {
+            createSquad.style.display = "block";
+            main.style.pointerEvents = "none";
+            main.style.filter = "blur(4px)";
+        });
+
+        back.addEventListener("click", () => {
+            createSquad.style.display = "none";
+            main.style.pointerEvents = "auto";
+            main.style.filter = "blur(0px)";
+        });
+
+        personSearch.addEventListener("keydown", () => {
+            if (personSearch.value.length >= 2) {
+
+                $.ajax({
+                    url: '@Url.Action("FindUser", "Squad")',
+                    data: { name: personSearch.value },
+                    success: function (data) {
+                        $("#rewrite").html(data);
+                    }
+                });
+            }
+        });
+
+        squadSearch.addEventListener("keydown", () => {
+            if (squadSearch.value.length >= 2) {
+
+                $.ajax({
+                    url: '@Url.Action("GetSquadsWithName","Squad")',
+                    data: { name: squadSearch.value },
+                    success: function (data) {
+                        $("#squadResult").html(data);
+                    }
+                });
+            }
+        });
+
+        submitBtn.addEventListener("click", () =>{
+            createSquad.style.display = "none";
+            main.style.pointerEvents = "auto";
+            main.style.filter = "blur(0px)";
+
+           
+
+            $.ajax({
+                url: '@Url.Action("CreateSquad","Squad")',
+                traditional: true,
+                data: { usersArray: arr, name: squadName.value, }
+               
+            });
+        });
+
+
         const connection = new signalR.HubConnectionBuilder()
             .withUrl("https://localhost:7112/SquadHub")
             .build();

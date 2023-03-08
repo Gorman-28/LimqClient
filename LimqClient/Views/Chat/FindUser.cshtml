@@ -1,0 +1,16 @@
+﻿@model ICollection<MyNamespace.GetUsersDto>
+
+@foreach (var user in Model)
+{
+    if (user.Id != LimqClient.Settings.SettingArray.MyUser.Id)
+    {
+        <div class="chat clickable" onclick="window.location='../Chat/CreateChat/@user.Id';">
+            <img class="avatar" src="data:image/jpeg;base64,@(Convert.ToBase64String(user.Avatar))" />
+            <div class="userName">@user.UserName</div>
+            <div class="fullName">
+                <div class="firstName"> @user.FirstName</div>
+                <div class="LastName"> @user.LastName</div>
+            </div>
+        </div>
+    }
+}

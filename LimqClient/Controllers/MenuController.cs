@@ -1,6 +1,8 @@
 ﻿using LimqClient.Settings;
 using Microsoft.AspNetCore.Mvc;
 using MyNamespace;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace LimqClient.Controllers
 {
@@ -17,7 +19,7 @@ namespace LimqClient.Controllers
             var userName = Request.Cookies["UserName"];
             var password = Request.Cookies["Password"];
             SettingArray.MyUser = await client.GetUserAsync(userName, password);
-            return RedirectToAction("Chats", "Menu");
+            return RedirectToAction("Chats");
         }
         
 
